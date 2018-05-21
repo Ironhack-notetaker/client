@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {AuthService} from './services/auth.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,22 +17,21 @@ export class AppComponent {
 
   login() {
     this.myService.login(this.formInfo)
-      .subscribe(
-        (user) => this.user = user,
-        (err) => this.error = err
-      );
+    .subscribe(
+      (user) => this.user = user,
+      (err) => this.error = err
+    );
   }
 
   signup() {
     this.myService.signup(this.formInfo)
       .subscribe(
         (user) => {this.user = user;
-          console.log(this.user);
+          console.log('user:', this.user);
         },
         (err) => this.error = err
       );
   }
-
 
   logout() {
     this.myService.logout()
@@ -41,7 +40,7 @@ export class AppComponent {
       this.formInfo = {};
     },
     (err) => this.error = err
-  );
+   );
   }
 
 
