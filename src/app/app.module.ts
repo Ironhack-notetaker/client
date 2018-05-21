@@ -1,22 +1,29 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-
 import { AppComponent } from './app.component';
-import { NoteService } from './services/note.service';
+import { AuthService } from './services/auth.service';
+
+const routes: Routes = [
+  { path: '', redirectTo: 'index', pathMatch: 'full'},
+  // { path: 'index', component: TaskListComponent },
+  // { path: 'task/:id', component: TaskDetailsComponent},
+ ];
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule,
-    HttpModule,
-    FormsModule
+  HttpModule,
+  BrowserModule,
+  FormsModule,
+  RouterModule.forRoot(routes),
   ],
-  providers: [NoteService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

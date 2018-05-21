@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { NoteService } from './services/note.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +9,11 @@ import { NoteService } from './services/note.service';
 })
 export class AppComponent {
 
-  constructor(private myService: NoteService) {}
+  constructor(private myService: AuthService) {}
 
-  formInfo: any = {username: "", password: ""};
-
+  formInfo: any = {username: '', password: ''};
   user: any;
   error: any;
-  title = 'Note Taker';
 
   login() {
     this.myService.login(this.formInfo)
@@ -27,23 +25,23 @@ export class AppComponent {
 
   signup() {
     this.myService.signup(this.formInfo)
-    .subscribe(
-      (user) => {
-        this.user = user;
-      },
-      (err) => this.error = err
-    );  
+      .subscribe(
+        (user) => {this.user = user;
+          console.log('user:', this.user);
+        },
+        (err) => this.error = err
+      );
   }
 
   logout() {
     this.myService.logout()
     .subscribe(
-      (user) => {
-        this.user = null
-        this.formInfo = {};
-      },
-      (err) => this.error = err
-    );  
+    () => {this.user = null;
+      this.formInfo = {};
+    },
+    (err) => this.error = err
+   );
   }
+
 
 }
