@@ -10,15 +10,17 @@
   <button (click)="login()"> login </button>
   <button (click)="signup()"> signup </button>
 </form>
+<a [routerLink] = "['/index']">Back to homepage</a>
 <p class="error"> {{ error }} </p>
 
 
 
 <div *ngIf="user">
-  <h2> You are now logged in as {{ user.userInfo.username }}!! </h2>
+  <h2> You are now logged in as {{ user.user.username }}!! </h2>
   <p> Here's the user object </p>
   <pre> {{ user | json }} </pre>
 
   <button (click)="logout()"> logout </button>
   <!-- <button (click)="getPrivateData()"> Get private data </button> -->
 </div>
+<router-outlet></router-outlet>
