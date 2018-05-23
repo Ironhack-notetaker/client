@@ -11,14 +11,14 @@ export class TeamService {
 
   constructor (private http: Http) { }
 
-  // getOneTeam(theId) {
-  //   return this.http.get(`http://localhost:3000/note/${theId}`)
-  //   .map((responseFromApi) => responseFromApi.json());
-  // }
+  getOneTeam(theId) {
+    return this.http.get(`http://localhost:3000/team/${theId}`)
+    .map((responseFromApi) => responseFromApi.json());
+  }
 
-  // getAllNotes() {
-  //   return this.http.get('http://localhost:3000/notes')
-  //   .map((responseFromApi) => responseFromApi.json());
-  // }
+  getAllTeams() {
+    return this.http.get('http://localhost:3000/team')
+    .map((responseFromApi) => responseFromApi.json());
+  }
 
 }

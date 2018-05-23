@@ -12,7 +12,7 @@ export class NoteService {
   constructor (private http: Http) { }
 
   getOneNote(theId) {
-    return this.http.get(`http://localhost:3000/note/${theId}`)
+    return this.http.get(`http://localhost:3000/notes/${theId}`)
     .map((responseFromApi) => responseFromApi.json());
   }
 

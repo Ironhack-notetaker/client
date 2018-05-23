@@ -1,3 +1,6 @@
 <p>
   teams-list works!
 </p>
+<div *ngFor="let oneTeam of allTheTeams">
+  <h3><a routerLink="/teams/{{oneTeam._id}}">{{oneTeam.teamName}}</a></h3>
+</div>

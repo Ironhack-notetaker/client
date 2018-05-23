@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../services/note.service';
+import { AuthService } from '../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -11,13 +12,15 @@ export class NotesListComponent implements OnInit {
 
   allTheNotes: Array<any> = [];
 
-  constructor(private myService: NoteService) { }
+  constructor(private noteService: NoteService,
+  private authService: AuthService) { }
 
   ngOnInit() {
-    this.myService.getAllNotes()
+    this.noteService.getAllNotes()
     .subscribe((theList) => {
       this.allTheNotes = theList;
     });
+
   }
 
 }

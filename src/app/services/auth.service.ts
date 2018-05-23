@@ -8,6 +8,8 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class AuthService {
 
+  currentUser: any;
+
   constructor(private http: Http) { }
 
   handleError(e) {
@@ -15,31 +17,43 @@ export class AuthService {
   }
 
   signup(user) {
-    return this.http.post(`http://localhost:3000/api/signup`, user)
-      .map(res => res.json())
+    return this.http.post(`http://localhost:3000/api/signup`, user, {withCredentials: true})
+      .map(res => res.json(), this.currentUser = user)
       .catch(this.handleError);
   }
 
   login(user) {
-    return this.http.post(`http://localhost:3000/api/login`, user)
-      .map(res => res.json())
+    return this.http.post(`http://localhost:3000/api/login`, user, {withCredentials: true})
+      .map(res => res.json(), this.currentUser = user)
       .catch(this.handleError);
   }
 
   logout() {
-    return this.http.post(`http://localhost:3000/api/logout`, {})
+    return this.http.post(`http://localhost:3000/api/logout`, {withCredentials: true})
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   isLoggedIn() {
-    return this.http.get(`http://localhost:3000/api/loggedin`)
-      .map(res => res.json())
+    return this.http.get(`http://localhost:3000/api/loggedin`, {withCredentials: true})
+      .map(res => {
+        console.log(res);
+        res.json();
+      })
       .catch(this.handleError);
   }
 
+  // isLoggedIn() {
+  //   return this.http.get(`http://localhost:3000/api/loggedin`, {withCredentials: true})
+  //   .toPromise()
+  //   .then((apiResult) => {
+  //     console.log(apiResult);
+  //     // this.currentUser = apiResult.userInfo;
+  //     return apiResult;
+  //   });
+  // }
   getPrivateData() {
-    return this.http.get(`http://localhost:3000/api/private`)
+    return this.http.get(`http://localhost:3000/api/private`, {withCredentials: true})
       .map(res => res.json())
       .catch(this.handleError);
   }
