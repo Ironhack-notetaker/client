@@ -10,9 +10,25 @@ import { ActivatedRoute } from '@angular/router';
 export class NoteItemComponent implements OnInit {
 
   theNote: any = {};
+  theUpdate: any = {};
 
   constructor(private myService: NoteService,
   private route: ActivatedRoute) { }
+
+  getOneNote(theId) {
+    this.myService.getOneNote(theId)
+    .subscribe((response) => {
+      this.theNote = response;
+    });
+  }
+
+  updateNote(theId) {
+    this.myService.updateNote(theId, this.theUpdate)
+    .subscribe(() => {
+      this.getOneNote(theId);
+      this.theUpdate = {};
+    });
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -20,8 +36,7 @@ export class NoteItemComponent implements OnInit {
       this.myService.getOneNote(theId)
       .subscribe((responseFromService) => {
         this.theNote = responseFromService;
-      });
     });
+  });
   }
-
 }

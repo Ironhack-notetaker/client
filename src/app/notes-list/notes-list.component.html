@@ -1,14 +1,36 @@
 <p>notes-list component works</p>
+<a [routerLink]="['/welcome']">Go back</a>
 <div *ngFor="let oneNote of allTheNotes">
   <a routerLink="/notes/{{oneNote._id}}">{{oneNote.title}}</a>
+  <button (click)="deleteNote(oneNote._id)">Delete</button>
 </div>
 
-<h3>Hello</h3>
 
-<div *ngIf="user">
+<button (click)="toggleForm()">Add New Note</button>
+<form *ngIf="isShowing">
+  <label>Title</label>
+  <input type="text" [(ngModel)]="newNote.title" name="title">
+  <button (click)="addNewNote()">Submit</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div *ngIf="user">
   <h2> You are now logged in as {{ user.userInfo.username }}!! </h2>
   <p> Here's the user object </p>
   <pre> {{ user | json }} </pre>
 
   <button (click)="logout()"> logout </button>
-</div>
+</div> -->

@@ -1,3 +1,8 @@
 <p>note-item works!</p>
+<a [routerLink]="['/notes']">Go back</a>
 
-{{theNote | json}}
+<label>Title</label>
+<h1>{{theNote.title}}</h1>
+
+<input name="text" value="{{theNote.text}}" [(ngModel)]="theUpdate.text" name="text"/>
+<button (click)="updateNote(theNote._id)">Submit Changes</button>

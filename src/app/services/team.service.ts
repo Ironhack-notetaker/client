@@ -21,4 +21,21 @@ export class TeamService {
     .map((responseFromApi) => responseFromApi.json());
   }
 
+  deleteTeam(theId) {
+    const body = {};
+    return this.http.post(`http://localhost:3000/team/delete/${theId}`, body)
+    .map((responseFromApi) => responseFromApi.json());
+  }
+
+  updateTeam(theId, theUpdates) {
+    return this.http.post(`http://localhost:3000/team/update/${theId}`, theUpdates)
+    .map((responseFromApi) => responseFromApi.json());
+  }
+
+  createTeam(theWholeTeam) {
+    return this.http.post(`http://localhost:3000/team/new`, theWholeTeam)
+    .map((responseFromApi) => responseFromApi.json());
+  }
+
+
 }

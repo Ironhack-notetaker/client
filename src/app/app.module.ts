@@ -13,7 +13,6 @@ import { NotesListComponent } from './notes-list/notes-list.component';
 import { NoteItemComponent } from './note-item/note-item.component';
 import { TeamsListComponent } from './teams-list/teams-list.component';
 import { TeamNotesListComponent } from './team-notes-list/team-notes-list.component';
-// import { TeamNoteItemComponent } from './team-note-item/team-note-item.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
@@ -34,7 +33,6 @@ const routes: Routes = [
     NoteItemComponent,
     TeamsListComponent,
     TeamNotesListComponent,
-    // TeamNoteItemComponent,
     LandingPageComponent
   ],
   imports: [

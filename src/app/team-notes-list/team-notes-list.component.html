@@ -1,5 +1,17 @@
-<p>
-  team note list component works
-</p>
 
-{{theTeam | json}}
+<a [routerLink]="['/teams']">Go back</a>
+
+<label>Team Name</label>
+<input type="text" value="{{theTeam.teamName}}" [(ngModel)]="theUpdate.teamName" name="teamName">
+
+<p>Notes: {{theTeam.note}}</p>
+
+
+<button (click)="updateTeam(theTeam._id)">Submit Changes</button>
+
+<button (click)="toggleForm()">Add New Note</button>
+<form *ngIf="isShowing">
+  <label>Title</label>
+  <input type="text" [(ngModel)]="newNote.title" name="title">
+  <button (click)="addNewNote()">Create new note</button>
+</form>
