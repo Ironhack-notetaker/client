@@ -1,15 +1,24 @@
-<p>
-teams-list works!</p>
-<a [routerLink]="['/welcome']">Go back</a>
+<div>
+    <div *ngIf="isUser" >
+      <p>Heyyyy! this is: {{ user.username }}</p>
+   
+    
+    <a [routerLink]="['/welcome']">Go back</a>
+    
+    <div *ngFor="let oneTeam of allTheTeams">
+      <a routerLink="/teams/{{oneTeam._id}}">{{oneTeam.teamName}}</a>
+      <button (click)="deleteTeam(oneTeam._id)">Delete</button>
+    </div>
+    
+    <button (click)="toggleForm()">Create New Team</button>
+    <form *ngIf="isShowing">
+      <label>Team Name:</label>
+      <input type="text" [(ngModel)]="newTeam.teamName" name="title">
+      <button (click)="addNewTeam()">Submit</button>
+    </form>
+  </div>
+  </div>
 
-<div *ngFor="let oneTeam of allTheTeams">
-  <a routerLink="/teams/{{oneTeam._id}}">{{oneTeam.teamName}}</a>
-  <button (click)="deleteTeam(oneTeam._id)">Delete</button>
-</div>
-
-<button (click)="toggleForm()">Create New Team</button>
-<form *ngIf="isShowing">
-  <label>Team Name:</label>
-  <input type="text" [(ngModel)]="newTeam.teamName" name="title">
-  <button (click)="addNewTeam()">Submit</button>
-</form>
+  <div *ngIf="message">
+      You're forbidden here. Please <a [routerLink]="['/welcome']">login</a> first!
+  </div>

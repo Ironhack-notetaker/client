@@ -4,14 +4,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
-
 @Component({
   selector: 'app-teams-list',
   templateUrl: './teams-list.component.html',
   styleUrls: ['./teams-list.component.css']
 })
 export class TeamsListComponent implements OnInit {
-
+  user: any;
+  message: any;
+  isUser: Boolean = true;
   allTheTeams: Array<any> = [];
 
   isShowing: Boolean = false;
@@ -19,7 +20,6 @@ export class TeamsListComponent implements OnInit {
   newTeam: any = {user: '', note: [], teamName: '',
    urgency: '', status: '', theme: ['']};
 
-  user: any;
 
   constructor(private myService: TeamService,
     private authService: AuthService,
