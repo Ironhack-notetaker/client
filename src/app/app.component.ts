@@ -1,6 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AuthService } from './services/auth.service';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  Observable
+} from 'rxjs/Observable';
+import {
+  AuthService
+} from './services/auth.service';
+import {
+  Router
+} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,49 +19,62 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(
-    private myService: AuthService,
-    public userThang: AuthService
-  ) {}
-
-
-  formInfo: any = {username: '', password: ''};
+  formInfo: any = {
+    username: '',
+    password: ''
+  };
   user: any;
   error: any;
 
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   ngOnInit() {
-    this.userThang.isLoggedIn()
-    .catch((err): any => {
-      alert('something went horribly wrong!!');
-    });
+    this.authService.isLoggedIn()
+      .toPromise()
+      .then(() => {
+        this.user = this.authService.currentUser;
+        if (this.user === null) {
+          this.router.navigate(['/welcome']);
+        }
+      })
+      .catch(err => {
+        console.log('err in notes: ', err);
+        this.router.navigate(['/welcome']);
+      });
   }
 
   login() {
-    this.userThang.login(this.formInfo)
-    .subscribe(
-      (user) => this.user = user,
-      (err) => this.error = err
-    );
+    this.authService.login(this.formInfo)
+      .subscribe(
+        (user) => this.user = user,
+        (err) => this.error = err
+      );
   }
 
   signup() {
-    this.myService.signup(this.formInfo)
-    .subscribe(
-      (user) => {this.user = user;
-        console.log('user:', this.user);
-      },
-      (err) => this.error = err
-    );
+    this.authService.signup(this.formInfo)
+      .subscribe(
+        (user) => {
+          this.user = user;
+          console.log('user:', this.user);
+        },
+        (err) => this.error = err
+      );
   }
 
   logout() {
-    this.myService.logout()
-    .subscribe(
-      () => {this.user = null;
-        this.formInfo = {};
-      },
-      (err) => this.error = err
-   );
+    this.authService.logout()
+      .subscribe(
+        () => {
+          this.user = null;
+          this.authService.currentUser = this.user;
+          this.formInfo = {};
+        },
+        (err) => this.error = err
+      );
   }
 
 

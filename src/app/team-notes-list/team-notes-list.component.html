@@ -4,22 +4,16 @@
 <label>Team Name</label>
 <input type="text" value="{{theTeam.teamName}}" [(ngModel)]="theUpdate.teamName" name="teamName">
 
-<p>Notes: {{theTeam.note}}</p>
+<p>Notes:</p> <div *ngFor="let note of theTeam.note">
+  <a routerLink="/notes/{{note._id}}">{{note.title}}</a>
+</div>
 
 
-<button (click)="updateTeam(theTeam._id)">Submit Changes</button>
+<button (click)="updateThisTeam(theTeam._id)">Submit Changes</button>
 
 <button (click)="toggleForm()">Add New Note</button>
 <form *ngIf="isShowing">
   <label>Title</label>
   <input type="text" [(ngModel)]="newNote.title" name="title">
-  <button (click)="addNewNote()">Create new note</button>
+  <button (click)="updateTeamsNotes(theTeam._id)">Create new note</button>
 </form>
-
-<div *ngIf="user">
-    <h2> You are now logged in as {{ user.userInfo.username }}!! </h2>
-    <p> Here's the user object </p>
-    <pre> {{ user | json }} </pre>
-  
-    <button (click)="logout()"> logout </button>
-  </div>

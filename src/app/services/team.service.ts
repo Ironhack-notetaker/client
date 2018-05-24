@@ -37,5 +37,9 @@ export class TeamService {
     .map((responseFromApi) => responseFromApi.json());
   }
 
+  updateTeamNotes(theTeamId, theNewNote) {
+    return this.http.post(`http://localhost:3000/team/notes/${theTeamId}`, theNewNote)
+    .map((responseFromApi) => responseFromApi.json());
+  }
 
 }
