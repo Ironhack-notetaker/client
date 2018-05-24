@@ -15,3 +15,11 @@
   <input type="text" [(ngModel)]="newNote.title" name="title">
   <button (click)="addNewNote()">Create new note</button>
 </form>
+
+<div *ngIf="user">
+    <h2> You are now logged in as {{ user.userInfo.username }}!! </h2>
+    <p> Here's the user object </p>
+    <pre> {{ user | json }} </pre>
+  
+    <button (click)="logout()"> logout </button>
+  </div>

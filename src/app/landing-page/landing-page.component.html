@@ -10,9 +10,9 @@
   <button (click)="login()"> login </button>
   <button (click)="signup()"> signup </button>
 </form>
-<a [routerLink] = "['/notes']">notes</a> <br> <hr>
-<a [routerLink] = "['/user']">user</a> <br> <hr>
-<a [routerLink] = "['/teams']">teams</a>
+<a routerLink = "/notes">notes</a> <br> <hr>
+<a routerLink = "/user">user</a> <br> <hr>
+<a routerLink = "/teams">teams</a>
 
 <p class="error"> {{ error }} </p>
 
@@ -22,4 +22,5 @@
   <pre> {{ user | json }} </pre>
 
   <button (click)="logout()"> logout </button>
+  <a routerLink="/teams"><button>Teams</button></a>
 </div>

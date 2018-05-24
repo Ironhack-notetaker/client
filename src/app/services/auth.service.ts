@@ -36,9 +36,10 @@ export class AuthService {
 
   isLoggedIn() {
     return this.http.get(`http://localhost:3000/api/loggedin`, {withCredentials: true})
-      .map(res => {
-        console.log(res);
-        res.json();
+      .map(userFromBackend => {
+        this.currentUser = userFromBackend;
+        // console.log('USER IN THE SERVICE:',userFromBackend);
+        userFromBackend.json();
       })
       .catch(this.handleError);
   }
