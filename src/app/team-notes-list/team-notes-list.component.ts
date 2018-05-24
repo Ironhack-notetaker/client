@@ -1,7 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { TeamService } from '../services/team.service';
-import { NoteService } from '../services/note.service';
-import { ActivatedRoute } from '@angular/router';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  TeamService
+} from '../services/team.service';
+import {
+  NoteService
+} from '../services/note.service';
+import {
+  ActivatedRoute
+} from '@angular/router';
 
 @Component({
   selector: 'app-team-notes-list',
@@ -12,19 +21,44 @@ export class TeamNotesListComponent implements OnInit {
 
   isShowing: Boolean = false;
 
-  allTheNotes: Array<any> = [];
+  allTheNotes: Array < any > = [];
 
-  theTeam: any = {user: '', note: [], teamName: '',
-  urgency: '', status: '', theme: ['']};
+  theTeam: any = {
+    user: '',
+    note: [],
+    teamName: '',
+    urgency: '',
+    status: '',
+    theme: ['']
+  };
 
   theUpdate: any = {};
 
-  newNote: any = {user: '', title : '', text: '', status: '',
-    urgency: '', category: '', date: Date.now(), theme: '', format: ''};
+  newNote: any = {
+    user: '',
+    title: '',
+    text: '',
+    status: '',
+    urgency: '',
+    category: '',
+    date: Date.now(),
+    theme: '',
+    format: ''
+  };
 
   constructor(private myService: TeamService,
-  private noteService: NoteService,
-  private route: ActivatedRoute) { }
+    private noteService: NoteService,
+    private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      const theId = (params['id']);
+      this.myService.getOneTeam(theId)
+        .subscribe((responseFromService) => {
+          this.theTeam = responseFromService;
+        });
+    });
+  }
 
   toggleForm() {
     this.isShowing = !this.isShowing;
@@ -32,39 +66,50 @@ export class TeamNotesListComponent implements OnInit {
 
   getOneTeam(theId) {
     this.myService.getOneTeam(theId)
-    .subscribe((response) => {
-      this.theTeam = response;
-    });
+      .subscribe((response) => {
+        this.theTeam = response;
+      });
   }
 
   addNewNote() {
+    const newOneNote = {
+      user: this.newNote.user,
+      title: this.newNote.title,
+      text: this.newNote.text,
+      status: this.newNote.status,
+      urgency: this.newNote.urgency,
+      category: this.newNote.category,
+      date: Date.now(),
+      theme: this.newNote.theme,
+      format: this.newNote.format
+    };
+
     this.noteService.createNote(this.newNote)
-    .subscribe(() => {
-      this.myService.getOneTeam(this.theTeam._id)
-      .subscribe((thisUpdatedTeam) => {
-        thisUpdatedTeam.note.push(this.newNote);
-        console.log(thisUpdatedTeam);
-// not saving note to team
+      .subscribe(() => {
+        this.myService.getOneTeam(this.theTeam._id)
+          .subscribe((thisUpdatedTeam) => {
+            thisUpdatedTeam.note.push(newOneNote);
+            this.updateThisTeam(this.theTeam._id);
+            console.log(thisUpdatedTeam);
+          });
       });
-    });
     this.toggleForm();
+    return newOneNote;
   }
 
-  updateTeam(theId) {
+  updateThisTeam(theId) {
     this.myService.updateTeam(theId, this.theUpdate)
-    .subscribe(() => {
-      this.getOneTeam(theId);
-      this.theUpdate = {};
-    });
+      .subscribe(() => {
+        this.getOneTeam(theId);
+        this.theUpdate = {};
+      });
   }
 
-  ngOnInit() {
-    this.route.params.subscribe((params) => {
-      const theId = (params['id']);
-      this.myService.getOneTeam(theId)
-      .subscribe((responseFromService) => {
-        this.theTeam = responseFromService;
-      });
+  updateTeamsNotes(theTeamId) {
+    this.myService.updateTeamNotes(theTeamId, this.addNewNote())
+    .subscribe(() => {
+      this.getOneTeam(theTeamId);
+      this.newNote.title = '';
     });
   }
 

@@ -1,2 +1,31 @@
-
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <div class="navbar-header">
+          <a class="navbar-brand">
+            <img src="https://vignette.wikia.nocookie.net/6teen/images/2/2a/Notepad.png/revision/latest?cb=20120424165831" 
+            class="logo" style="width: 40px">
+          </a>
+          <span class="navbar-brand">Note Taker</span>
+      </div>
+      <ul class="nav navbar-nav">
+          <li class="dropdown" dropdown> 
+              <a dropdownToggle role="button">
+                Menu 
+                <span class="caret"></span></a>
+              <ul *dropdownMenu class="dropdown-menu">
+                  <li><a [routerLink] = "['/welcome']">Homepage</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a [routerLink] = "['/notes']">Notes</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a [routerLink] = "['/teams']">Teams</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a [routerLink] = "['/user']">Profile</a></li>
+                <div *ngIf="user">
+                  <li><a [routerLink] = "['/welcome']">Homepage</a></li>
+                </div>
+              </ul>
+          </li>
+      </ul>
+  </div>
+</nav>
 <router-outlet></router-outlet>

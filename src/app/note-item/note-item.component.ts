@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../services/note.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-note-item',
@@ -9,11 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NoteItemComponent implements OnInit {
 
+  user: any;
   theNote: any = {};
   theUpdate: any = {};
 
   constructor(private myService: NoteService,
-  private route: ActivatedRoute) { }
+  private authService: AuthService,
+  private route: ActivatedRoute,
+  private router: Router) { }
 
   getOneNote(theId) {
     this.myService.getOneNote(theId)
@@ -31,12 +35,26 @@ export class NoteItemComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.isLoggedIn()
+      .toPromise()
+      .then(() => {
+        this.user = this.authService.currentUser;
+        console.log('this.user: ', this.user);
+        if (this.user === null) {
+          this.router.navigate(['/welcome']);
+        }
+      })
+      .catch(err => {
+        console.log('err in notes: ', err);
+        this.router.navigate(['/welcome']);
+      });
+
     this.route.params.subscribe((params) => {
-      const theId = (params['id']);
-      this.myService.getOneNote(theId)
-      .subscribe((responseFromService) => {
-        this.theNote = responseFromService;
+        const theId = (params['id']);
+        this.myService.getOneNote(theId)
+        .subscribe((responseFromService) => {
+          this.theNote = responseFromService;
+        });
     });
-  });
   }
 }

@@ -5,7 +5,6 @@
   <button (click)="deleteNote(oneNote._id)">Delete</button>
 </div>
 
-
 <button (click)="toggleForm()">Add New Note</button>
 <form *ngIf="isShowing">
   <label>Title</label>
@@ -13,6 +12,13 @@
   <button (click)="addNewNote()">Submit</button>
 </form>
 
+<div *ngIf="user">
+  <h2> You are now logged in as {{ user.username }}!! </h2>
+  <p> Here's the user object </p>
+  <pre> {{ user | json }} </pre>
+
+  <button (click)="logout()"> logout </button>
+</div>
 
 
 
@@ -26,11 +32,10 @@
 
 
 
-
-<!-- <div *ngIf="user">
+<div *ngIf="userInfo">
   <h2> You are now logged in as {{ user.userInfo.username }}!! </h2>
   <p> Here's the user object </p>
   <pre> {{ user | json }} </pre>
 
   <button (click)="logout()"> logout </button>
-</div> -->
+</div>
