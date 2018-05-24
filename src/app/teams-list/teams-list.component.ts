@@ -11,8 +11,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class TeamsListComponent implements OnInit {
   user: any;
-  // message: any;
-  // isUser: Boolean = true;
+  message: any;
+  isUser: Boolean = true;
   allTheTeams: Array<any> = [];
 
   isShowing: Boolean = false;
