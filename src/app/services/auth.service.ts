@@ -25,7 +25,7 @@ export class AuthService {
 
   login(user) {
     return this.http.post(`http://localhost:3000/api/login`, user, {withCredentials: true})
-      .map(res => res.json(), this.currentUser.userInfo = user)
+      .map(res => res.json(), this.currentUser = user)
       .catch(this.handleError);
   }
 

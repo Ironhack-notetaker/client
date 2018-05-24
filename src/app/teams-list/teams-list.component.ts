@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TeamService } from '../services/team.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -18,8 +19,11 @@ export class TeamsListComponent implements OnInit {
   newTeam: any = {user: '', note: [], teamName: '',
    urgency: '', status: '', theme: ['']};
 
+  user: any;
+
   constructor(private myService: TeamService,
-  private router: Router) { }
+    private authService: AuthService,
+    private router: Router) { }
 
   toggleForm() {
     this.isShowing = !this.isShowing;
@@ -47,6 +51,19 @@ export class TeamsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.isLoggedIn()
+      .toPromise()
+      .then(() => {
+        this.user = this.authService.currentUser;
+        if (this.user === null) {
+          this.router.navigate(['/welcome']);
+        }
+      })
+      .catch(err => {
+        console.log('err in notes: ', err);
+        this.router.navigate(['/welcome']);
+      });
+
     this.getAllTheTeams();
   }
 
