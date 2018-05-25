@@ -51,7 +51,7 @@ export class LandingPageComponent {
   logout() {
     this.myService.logout()
       .subscribe(
-        () => {
+        (res) => {
           this.formInfo = {};
           this.user = null;
           this.myService.currentUser = null;

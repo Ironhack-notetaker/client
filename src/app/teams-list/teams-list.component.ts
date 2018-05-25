@@ -10,9 +10,9 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./teams-list.component.css']
 })
 export class TeamsListComponent implements OnInit {
+
   user: any;
   message: any;
-  isUser: Boolean = true;
   allTheTeams: Array<any> = [];
 
   isShowing: Boolean = false;
@@ -24,6 +24,23 @@ export class TeamsListComponent implements OnInit {
   constructor(private myService: TeamService,
     private authService: AuthService,
     private router: Router) { }
+
+  ngOnInit() {
+    this.authService.isLoggedIn()
+      .toPromise()
+      .then(() => {
+        this.user = this.authService.currentUser;
+        if (this.user === null) {
+          this.router.navigate(['/welcome']);
+        }
+      })
+      .catch(err => {
+        console.log('err in teams: ', err);
+        this.router.navigate(['/welcome']);
+      });
+
+    this.getAllTheTeams();
+  }
 
   toggleForm() {
     this.isShowing = !this.isShowing;
@@ -48,23 +65,6 @@ export class TeamsListComponent implements OnInit {
     .subscribe(() => {
       this.getAllTheTeams();
     });
-  }
-
-  ngOnInit() {
-    this.authService.isLoggedIn()
-      .toPromise()
-      .then(() => {
-        this.user = this.authService.currentUser;
-        if (this.user === null) {
-          this.router.navigate(['/welcome']);
-        }
-      })
-      .catch(err => {
-        console.log('err in notes: ', err);
-        this.router.navigate(['/welcome']);
-      });
-
-    this.getAllTheTeams();
   }
 
 }

@@ -25,8 +25,6 @@ export class NotesListComponent implements OnInit {
 
   user: any;
 
-  isUser: Boolean = true;
-
   allTheNotes: Array < any > = [];
 
   isShowing: Boolean = false;

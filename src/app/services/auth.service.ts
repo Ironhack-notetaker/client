@@ -30,9 +30,11 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post(`http://localhost:3000/api/logout`, {withCredentials: true})
+    return this.http.delete(`http://localhost:3000/api/logout`, {withCredentials: true})
       .map(res => {
-        this.currentUser = null;
+        // this.temporaryUser = res;
+        // this.currentUser = JSON.parse(this.temporaryUser._body).userInfo;
+
         res.json();
       })
       .catch(this.handleError);
@@ -41,12 +43,10 @@ export class AuthService {
   isLoggedIn() {
     return this.http.get(`http://localhost:3000/api/loggedin`, {withCredentials: true})
       .map(res => {
-        this.temporaryUser = res;
-
-        // this.currentUser = JSON.parse(res._body);
-        this.currentUser = JSON.parse(this.temporaryUser._body).userInfo;
-
-        console.log('isLoggedIn function in service: ', this.currentUser);
+        this.currentUser = res.json();
+        // this.temporaryUser = res;
+        // this.currentUser = JSON.parse(this.temporaryUser._body).userInfo;
+        // console.log('isLoggedIn function in service: ', this.currentUser);
       })
       .catch(this.handleError);
   }

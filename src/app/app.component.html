@@ -20,9 +20,11 @@
                   <li><a [routerLink] = "['/teams']">Teams</a></li>
                   <li role="separator" class="divider"></li>
                   <li><a [routerLink] = "['/user']">Profile</a></li>
-                <div *ngIf="user">
-                  <li><a [routerLink] = "['/welcome']">Homepage</a></li>
-                </div>
+                  <li role="separator" class="divider"></li>
+                  <li><a [routerLink] = "['/quicky']">Quick Note</a></li>
+                  
+                <!-- <div *ngIf="user">
+                </div> -->
               </ul>
           </li>
       </ul>

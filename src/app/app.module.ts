@@ -14,12 +14,14 @@ import { AppComponent } from './app.component';
 import { AuthService } from './services/auth.service';
 import { NoteService } from './services/note.service';
 import { TeamService } from './services/team.service';
+import { DataService } from './services/quicky.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { NotesListComponent } from './notes-list/notes-list.component';
 import { NoteItemComponent } from './note-item/note-item.component';
 import { TeamsListComponent } from './teams-list/teams-list.component';
 import { TeamNotesListComponent } from './team-notes-list/team-notes-list.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { QuickNoteComponent } from './quick-note/quick-note.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full'},
@@ -29,6 +31,7 @@ const routes: Routes = [
   { path: 'teams', component: TeamsListComponent },
   { path: 'teams/:id', component: TeamNotesListComponent },
   { path: 'welcome', component: LandingPageComponent },
+  { path: 'quicky', component: QuickNoteComponent },
  ];
 
 @NgModule({
@@ -39,7 +42,8 @@ const routes: Routes = [
     NoteItemComponent,
     TeamsListComponent,
     TeamNotesListComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    QuickNoteComponent
   ],
   imports: [
   HttpModule,
@@ -51,7 +55,7 @@ const routes: Routes = [
   TooltipModule.forRoot(),
   ModalModule.forRoot()
   ],
-  providers: [AuthService, NoteService, TeamService],
+  providers: [AuthService, NoteService, TeamService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
