@@ -65,6 +65,8 @@ export class TeamsListComponent implements OnInit {
     .subscribe(() => {
       this.getAllTheTeams();
     });
+    this.authService.currentUser.userInfo.teams.unshift(this.newTeam);
+    console.log(this.authService.currentUser.userInfo.teams);
   }
 
 }

@@ -32,14 +32,14 @@ export class QuickNoteComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      const theUsername = (params['username']);
-      this.authService.getUsername(theUsername)
-      .subscribe((responseFromService) => {
-        this.user.userInfo.username = responseFromService;
-        console.log(responseFromService);
-      });
-    });
+    // this.route.params.subscribe((params) => {
+    //   const theUsername = (params['username']);
+    //   this.authService.getUsername(theUsername)
+    //   .subscribe((responseFromService) => {
+    //     this.user.userInfo.username = responseFromService;
+    //     console.log(responseFromService);
+    //   });
+    // });
 
 
     this.saveQuickNote();

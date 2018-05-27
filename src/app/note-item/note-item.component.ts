@@ -56,5 +56,6 @@ export class NoteItemComponent implements OnInit {
           this.theNote = responseFromService;
         });
     });
+
   }
 }
