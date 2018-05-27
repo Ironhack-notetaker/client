@@ -55,6 +55,7 @@ export class LandingPageComponent {
           this.formInfo = {};
           this.user = null;
           this.myService.currentUser = null;
+          this.router.navigate(['/welcome']);
         },
         (err) => this.error = err
       );
@@ -66,8 +67,8 @@ export class LandingPageComponent {
       .toPromise()
       .then(() => {
         this.user = this.myService.currentUser;
-        console.log('this.user: ', this.user);
-        if (this.user === null) {
+        console.log('this.user: ', this.user.userInfo);
+        if (this.user.userInfo === null) {
           this.router.navigate(['/welcome']);
         }
       })

@@ -40,7 +40,7 @@ export class NoteItemComponent implements OnInit {
       .then(() => {
         this.user = this.authService.currentUser;
         console.log('this.user: ', this.user);
-        if (this.user === null) {
+        if (this.user.userInfo === null) {
           this.router.navigate(['/welcome']);
         }
       })

@@ -13,6 +13,11 @@ export class AuthService {
 
   constructor(private http: Http) { }
 
+  getUsername(username) {
+    return this.http.get(`http://localhost:3000/api/quicky/${username}`, {withCredentials: true})
+    .map((responseFromApi) => this.currentUser = responseFromApi.json());
+  }
+
   handleError(e) {
     return Observable.throw(e.json().message);
   }
@@ -31,23 +36,13 @@ export class AuthService {
 
   logout() {
     return this.http.delete(`http://localhost:3000/api/logout`, {withCredentials: true})
-      .map(res => {
-        // this.temporaryUser = res;
-        // this.currentUser = JSON.parse(this.temporaryUser._body).userInfo;
-
-        res.json();
-      })
+      .map(res => { res.json(); })
       .catch(this.handleError);
   }
 
   isLoggedIn() {
     return this.http.get(`http://localhost:3000/api/loggedin`, {withCredentials: true})
-      .map(res => {
-        this.currentUser = res.json();
-        // this.temporaryUser = res;
-        // this.currentUser = JSON.parse(this.temporaryUser._body).userInfo;
-        // console.log('isLoggedIn function in service: ', this.currentUser);
-      })
+      .map(res => { this.currentUser = res.json(); })
       .catch(this.handleError);
   }
 

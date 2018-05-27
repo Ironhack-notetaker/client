@@ -9,16 +9,19 @@
   <button (click)="login()"> login </button>
   <button (click)="signup()"> signup </button>
 </form>
-<a routerLink = "/notes">notes</a> <br> <hr>
-<a routerLink = "/user">user</a> <br> <hr>
-<a routerLink = "/teams">teams</a>
+
+<editor apiKey="test" [init]="{plugins: 'link'}"></editor>
 
 <p class="error"> {{ error }} </p>
 
 <div *ngIf="user">
-  <h2> You are now logged in as {{ user.username }}!! </h2>
-  <p> Here's the user object </p>
-  <pre> {{ user | json }} </pre>
+  <div *ngIf="user.isLoggedIn">
 
-  <button (click)="logout()"> logout </button>
+    <h2> You are now logged in as {{ user.userInfo.username }}!! </h2>
+    <p> Here's the user object </p>
+    <pre> {{ user.userInfo | json }} </pre>
+    
+    <button (click)="logout()"> logout </button>
+    
+  </div>
 </div>

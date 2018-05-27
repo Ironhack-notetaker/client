@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../services/quicky.service';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { Http, Response } from '@angular/http';
+
 
 @Component({
   selector: 'app-quick-note',
@@ -8,12 +12,12 @@ import { DataService } from '../services/quicky.service';
 })
 export class QuickNoteComponent implements OnInit {
 
-  constructor( private myService: DataService) { }
+  user: any;
 
-  ngOnInit() {
-    this.saveQuickNote();
-  }
-
+  constructor( private myService: DataService,
+  private authService: AuthService,
+  private route: ActivatedRoute,
+  private http: Http) { }
 
   saveQuickNote() {
     if (this.myService.hasData()) {
@@ -26,4 +30,26 @@ export class QuickNoteComponent implements OnInit {
       });
     }
   }
+
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      const theUsername = (params['username']);
+      this.authService.getUsername(theUsername)
+      .subscribe((responseFromService) => {
+        this.user.userInfo.username = responseFromService;
+        console.log(responseFromService);
+      });
+    });
+
+
+    this.saveQuickNote();
+  }
+
+  // getThisUsername(theUsername) {
+  //   this.myService.getUsername(theUsername)
+  //   .subscribe((response) => {
+  //     this.user = response;
+  //   });
+  // }
+
 }

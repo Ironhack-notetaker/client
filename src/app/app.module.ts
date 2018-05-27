@@ -4,10 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { EditorModule } from '@tinymce/tinymce-angular';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Components and services
 import { AppComponent } from './app.component';
@@ -50,10 +51,11 @@ const routes: Routes = [
   BrowserModule,
   FormsModule,
   RouterModule.forRoot(routes),
-  // NgbModule.forRoot(),
   BsDropdownModule.forRoot(),
   TooltipModule.forRoot(),
-  ModalModule.forRoot()
+  ModalModule.forRoot(),
+  EditorModule
+  // NgbModule.forRoot(),
   ],
   providers: [AuthService, NoteService, TeamService, DataService],
   bootstrap: [AppComponent]

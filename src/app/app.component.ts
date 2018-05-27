@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
       .toPromise()
       .then(() => {
         this.user = this.authService.currentUser;
-        if (this.user === null) {
+        if (this.user.userInfo === null) {
           this.router.navigate(['/welcome']);
         }
       })
