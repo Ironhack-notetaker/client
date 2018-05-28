@@ -10,16 +10,15 @@
   <button (click)="signup()"> signup </button>
 </form>
 
-<!-- <editor apiKey="5h8cno0g0qjmtfev3xb5rwrs2eqke2ev09zpqy58stm3c5vw" [init]="{plugins: 'link'}" [inline]></editor> -->
 
 <p class="error"> {{ error }} </p>
 
 <div *ngIf="user">
   <div *ngIf="user.isLoggedIn">
 
-    <h2> You are now logged in as {{ user.userInfo.username }}!! </h2>
+    <h2> You are now logged in as {{ this.user.userInfo.username }}!! </h2>
     <p> Here's the user object </p>
-    <pre> {{ user.userInfo | json }} </pre>
+    <pre> {{ user | json }} </pre>
     
     <button (click)="logout()"> logout </button>
     

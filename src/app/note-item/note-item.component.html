@@ -1,17 +1,20 @@
-<p>note-item works!</p>
-<a [routerLink]="['/notes']">Go back</a>
+<a [routerLink]="['/notes']">Go back</a> <br>
+
 
 <label>Title</label>
-<h1>{{theNote.title}}</h1>
+<input type="text" value="{{theNote.title}}" [(ngModel)]="theUpdate.title">
 
 
 <editor apiKey="5h8cno0g0qjmtfev3xb5rwrs2eqke2ev09zpqy58stm3c5vw" 
 [init]="{plugins: 'link, lists, autolink, code, fullscreen, wordcount, table, tinymcespellchecker, image, imagetools'}" 
 [(ngModel)]="theUpdate.text" 
- name="text" 
- initialValue="{{theNote.text}}"
- menubar="false"
- toolbar="undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | table | link image | fullscreen">
+name="text" 
+initialValue="{{theNote.text}}"
+menubar="false"
+toolbar="undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | table | link image | fullscreen">
 </editor>
 <!-- <input name="text" value="{{theNote.text}}" [(ngModel)]="theUpdate.text" name="text"/> -->
-<button (click)="updateNote(theNote._id)">Submit Changes</button>
+<div *ngIf="this.user.userInfo.username === theNote.user">
+  <button (click)="updateNote(theNote._id)">Submit Changes</button>
+  <button (click)="deleteNote(theNote._id)">Delete</button>
+</div>

@@ -37,4 +37,9 @@ export class NoteService {
     .map((responseFromApi) => responseFromApi.json());
   }
 
+  favoriteNote(theId, theNoteId, theNote) {
+    return this.http.post(`http://localhost:3000/api/favorites/${theId}/${theNoteId}`, theNote)
+    .map((responseFromApi) => responseFromApi.json());
+  }
+
 }

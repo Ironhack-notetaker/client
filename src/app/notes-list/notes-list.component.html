@@ -1,8 +1,23 @@
-<p>notes-list component works</p>
 <a [routerLink]="['/welcome']">Go back</a>
+
+<input placeholder="Search by title" [(ngModel)]='searchText' (keyup)="search(searchText)">
+<div *ngFor="let oneNote of noteResults">
+  <a routerLink="/notes/{{oneNote._id}}">{{oneNote.title}}</a>
+  <button (click)="myNotes(user.userInfo._id, oneNote._id, oneNote)">Add to favorites</button>
+  
+</div>
+
+<button (click)="sort(allTheNotes)">Sort</button>
 <div *ngFor="let oneNote of allTheNotes">
   <a routerLink="/notes/{{oneNote._id}}">{{oneNote.title}}</a>
-  <button (click)="deleteNote(oneNote._id)">Delete</button>
+</div>
+
+<h2>My notes</h2>
+<div *ngIf="this.user.userInfo !== null">
+  <div *ngFor="let favorite of this.user.userInfo.favorites">
+    <p>{{favorite || json}}</p>
+    <a routerLink="/notes/{{favorite._id}}">{{favorite.title}}</a>
+  </div>
 </div>
 
 <button (click)="toggleForm()">Add New Note</button>
@@ -12,13 +27,7 @@
   <button (click)="addNewNote()">Submit</button>
 </form>
 
-<div *ngIf="user">
-  <h2> You are now logged in as {{ user.username }}!! </h2>
-  <p> Here's the user object </p>
-  <pre> {{ user | json }} </pre>
 
-  <button (click)="logout()"> logout </button>
-</div>
 
 
 

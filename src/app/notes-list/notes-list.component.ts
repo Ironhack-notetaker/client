@@ -25,9 +25,13 @@ export class NotesListComponent implements OnInit {
 
   user: any;
 
-  allTheNotes: Array < any > = [];
+  allTheNotes: Array<any> = [];
 
   isShowing: Boolean = false;
+
+  noteResults: Array<any> = this.allTheNotes;
+
+  sortedNotes: any = this.allTheNotes;
 
   // Add user to newNote.user
   newNote: any = {
@@ -59,9 +63,7 @@ export class NotesListComponent implements OnInit {
         console.log('err in notes: ', err);
         this.router.navigate(['/welcome']);
       });
-
       this.getAllTheNotes();
-
     }
 
   logout() {
@@ -70,6 +72,20 @@ export class NotesListComponent implements OnInit {
 
   toggleForm() {
     this.isShowing = !this.isShowing;
+  }
+
+  search(searchText) {
+    this.noteResults = this.allTheNotes.filter(notes => {
+      return notes.title.toLowerCase().includes(searchText.toLowerCase());
+    });
+    this.getAllTheNotes();
+  }
+
+  myNotes(theId, noteId, note) {
+    this.noteService.favoriteNote(theId, noteId, note)
+      .subscribe(() => {
+        this.getAllTheNotes();
+      });
   }
 
   getAllTheNotes() {
@@ -93,6 +109,9 @@ export class NotesListComponent implements OnInit {
       });
   }
 
+  sort(notes) {
+    this.allTheNotes.sort();
+  }
 
 
 }

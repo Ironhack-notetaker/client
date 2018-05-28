@@ -1,8 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { TeamService } from '../services/team.service';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  TeamService
+} from '../services/team.service';
+import {
+  ActivatedRoute
+} from '@angular/router';
+import {
+  Router
+} from '@angular/router';
+import {
+  AuthService
+} from '../services/auth.service';
 
 @Component({
   selector: 'app-teams-list',
@@ -13,17 +24,23 @@ export class TeamsListComponent implements OnInit {
 
   user: any;
   message: any;
-  allTheTeams: Array<any> = [];
+  allTheTeams: Array < any > = [];
 
   isShowing: Boolean = false;
 
-  newTeam: any = {user: '', note: [], teamName: '',
-   urgency: '', status: '', theme: ['']};
+  newTeam: any = {
+    user: '',
+    note: [],
+    teamName: '',
+    urgency: '',
+    status: '',
+    theme: ['']
+  };
 
 
   constructor(private myService: TeamService,
     private authService: AuthService,
-    private router: Router) { }
+    private router: Router) {}
 
   ngOnInit() {
     this.authService.isLoggedIn()
@@ -48,25 +65,23 @@ export class TeamsListComponent implements OnInit {
 
   getAllTheTeams() {
     this.myService.getAllTeams()
-    .subscribe((teamList) => {
-      this.allTheTeams = teamList;
-    });
+      .subscribe((teamList) => {
+        this.allTheTeams = teamList;
+      });
   }
 
   deleteTeam(theId) {
     this.myService.deleteTeam(theId)
-    .subscribe(() => {
-      this.getAllTheTeams();
-    });
+      .subscribe(() => {
+        this.getAllTheTeams();
+      });
   }
 
   addNewTeam() {
     this.myService.createTeam(this.newTeam)
-    .subscribe(() => {
-      this.getAllTheTeams();
-    });
-    this.authService.currentUser.userInfo.teams.unshift(this.newTeam);
-    console.log(this.authService.currentUser.userInfo.teams);
+      .subscribe(() => {
+        this.getAllTheTeams();
+      });
   }
 
 }

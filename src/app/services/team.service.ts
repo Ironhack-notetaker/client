@@ -33,7 +33,7 @@ export class TeamService {
   }
 
   createTeam(theWholeTeam) {
-    return this.http.post(`http://localhost:3000/team/new`, theWholeTeam)
+    return this.http.post(`http://localhost:3000/api/team/new`, theWholeTeam)
     .map((responseFromApi) => responseFromApi.json());
   }
 
