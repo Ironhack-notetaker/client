@@ -46,14 +46,24 @@ export class AuthService {
       .catch(this.handleError);
   }
 
-  updateUser(userId, updatedUser) {
-    return this.http.get(`http:localhost:3000/api/user/update/${userId}`, updatedUser)
-    .map((response) => { this.currentUser = response; } );
+  getUserInfo() {
+    return this.http.get('http://localhost:3000/api/userinfo', {withCredentials: true})
+    .map((responseFromApi) => responseFromApi.json());
   }
 
-  getPrivateData() {
-    return this.http.get(`http://localhost:3000/api/private`, {withCredentials: true})
-      .map(res => res.json())
-      .catch(this.handleError);
+  updateUserInfo(body) {
+    return this.http.post('http://localhost:3000/api/updateuser', body, {withCredentials: true})
+    .map((responseFromApi) => responseFromApi.json());
   }
+
+  // updateUser(userId, updatedUser) {
+  //   return this.http.get(`http:localhost:3000/api/user/update/${userId}`, updatedUser)
+  //   .map((response) => { this.currentUser = response; } );
+  // }
+
+  // getPrivateData() {
+  //   return this.http.get(`http://localhost:3000/api/private`, {withCredentials: true})
+  //     .map(res => res.json())
+  //     .catch(this.handleError);
+  // }
 }

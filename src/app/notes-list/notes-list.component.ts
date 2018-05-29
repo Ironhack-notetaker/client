@@ -39,7 +39,7 @@ export class NotesListComponent implements OnInit {
 
   // Add user to newNote.user
   newNote: any = {
-    user: this.user.userInfo.username,
+    user: '',
     title: '',
     text: '',
     status: '',
@@ -118,6 +118,7 @@ export class NotesListComponent implements OnInit {
       .subscribe((theList) => {
         this.allTheNotes = theList;
       });
+    this.noteService.getFavorites();
   }
 
   deleteNote(theId) {

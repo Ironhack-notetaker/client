@@ -12,7 +12,7 @@ import {
   AuthService
 } from '../services/auth.service';
 import {
-  ActivatedRoute
+  ActivatedRoute, Router
 } from '@angular/router';
 
 @Component({
@@ -28,8 +28,10 @@ export class TeamNotesListComponent implements OnInit {
 
   allTheNotes: Array < any > = [];
 
+  teamNotes: any = [];
+
   theTeam: any = {
-    user: [this.authService.currentUser.username],
+    user: [''],
     note: [''],
     teamName: '',
     urgency: '',
@@ -40,7 +42,7 @@ export class TeamNotesListComponent implements OnInit {
   theUpdate: any = {};
 
   newNote: any = {
-    user: this.authService.currentUser.username,
+    user: '',
     title: '',
     text: '',
     status: '',
@@ -54,7 +56,8 @@ export class TeamNotesListComponent implements OnInit {
   constructor(private myService: TeamService,
     private noteService: NoteService,
     private authService: AuthService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -63,6 +66,24 @@ export class TeamNotesListComponent implements OnInit {
         .subscribe((responseFromService) => {
           this.theTeam = responseFromService;
         });
+    });
+
+    this.authService.isLoggedIn()
+    .toPromise()
+    .then(() => {
+      this.user = this.authService.currentUser;
+      if (this.user.userInfo === null) {
+        this.router.navigate(['/welcome']);
+      }
+    })
+    .catch(err => {
+      console.log('err in notes: ', err);
+      this.router.navigate(['/welcome']);
+    });
+
+    this.myService.getTeamNotes(this.theTeam._id)
+    .subscribe((response) => {
+      this.theTeam = response.notes;
     });
   }
 
@@ -73,7 +94,8 @@ export class TeamNotesListComponent implements OnInit {
   getOneTeam(theId) {
     this.myService.getOneTeam(theId)
       .subscribe((response) => {
-        this.theTeam = response;
+        this.theTeam.note = response;
+        console.log(this.theTeam);
       });
   }
 

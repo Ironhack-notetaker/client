@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { NoteService } from '../services/note.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,11 +10,13 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
 
-  formInfo: any = {username: '', password: ''};
+  formInfo: any = {bio: ''};
   user: any;
   error: string;
+  userFavorites: any = [];
 
   constructor( private authService: AuthService,
+    private noteService: NoteService,
     private router: Router ) { }
 
   ngOnInit() {
@@ -30,6 +33,23 @@ export class UserProfileComponent implements OnInit {
         this.router.navigate(['/welcome']);
       });
 
+    this.authService.getUserInfo()
+    .subscribe((user) => {
+      this.user = user;
+      console.log('user from user profile page', this.user);
+    });
+
+    this.noteService.getFavorites()
+    .subscribe((favorites) => {
+      this.userFavorites = favorites;
+    });
+  }
+
+  updateUserInfo() {
+    this.authService.updateUserInfo(this.formInfo)
+    .subscribe(() => {
+      this.formInfo = {};
+    });
   }
 
 

@@ -80,7 +80,7 @@ export class TeamsListComponent implements OnInit {
   addNewTeam() {
     this.myService.createTeam(this.newTeam)
       .subscribe((team) => {
-        team.user.push(this.user.userInfo.username);
+        team.user.unshift(this.user.username);
         this.getAllTheTeams();
       });
   }

@@ -1,3 +1,12 @@
 <p>
   user-profile works!
 </p>
+<p>{{user | json}}</p>
+<div *ngFor="let favorite of userFavorites">
+  <p><a routerLink="/notes/{{favorite._id}}">{{favorite.title}}</a></p>
+</div>
+<form>
+  <label>Bio</label>
+  <input type="text" value="this.user.bio" [(ngModel)]="formInfo.bio" name="bio">
+  <button (click)="updateUserInfo()">Update</button>
+</form>

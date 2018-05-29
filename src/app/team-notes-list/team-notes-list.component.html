@@ -5,6 +5,7 @@
 <input type="text" value="{{theTeam.teamName}}" [(ngModel)]="theUpdate.teamName" name="teamName">
 
 <p>Notes:</p> <div *ngFor="let note of theTeam.note">
+  hi
   <a routerLink="/notes/{{note._id}}">{{note.title}}</a>
 </div>
 
