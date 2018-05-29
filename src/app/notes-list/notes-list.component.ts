@@ -23,7 +23,7 @@ import {
 })
 export class NotesListComponent implements OnInit {
 
-  user: any;
+  public user: any = this.authService.currentUser;
 
   allTheNotes: Array<any> = [];
 
@@ -33,9 +33,13 @@ export class NotesListComponent implements OnInit {
 
   sortedNotes: any = this.allTheNotes;
 
+  favoriteNotes: any = [];
+
+  singleNote: any;
+
   // Add user to newNote.user
   newNote: any = {
-    user: '',
+    user: this.user.userInfo.username,
     title: '',
     text: '',
     status: '',
@@ -63,11 +67,25 @@ export class NotesListComponent implements OnInit {
         console.log('err in notes: ', err);
         this.router.navigate(['/welcome']);
       });
+
+      this.noteService.getFavorites()
+      .toPromise()
+      .then((favorites) => {
+        this.favoriteNotes = favorites;
+      });
+
       this.getAllTheNotes();
     }
 
   logout() {
     this.authService.logout();
+  }
+
+  getOneNote(noteId) {
+    this.noteService.getOneNote(noteId)
+      .subscribe((theNote) => {
+        this.singleNote = theNote;
+      });
   }
 
   toggleForm() {
@@ -86,6 +104,13 @@ export class NotesListComponent implements OnInit {
       .subscribe(() => {
         this.getAllTheNotes();
       });
+  }
+
+  removeMyNotes(theId, noteId, note) {
+    this.noteService.removeFavorite(theId, noteId, note)
+    .subscribe(() => {
+      this.getAllTheNotes();
+    });
   }
 
   getAllTheNotes() {

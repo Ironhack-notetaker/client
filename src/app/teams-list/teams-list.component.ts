@@ -22,7 +22,7 @@ import {
 })
 export class TeamsListComponent implements OnInit {
 
-  user: any;
+  user: any = this.authService.currentUser;
   message: any;
   allTheTeams: Array < any > = [];
 
@@ -79,7 +79,8 @@ export class TeamsListComponent implements OnInit {
 
   addNewTeam() {
     this.myService.createTeam(this.newTeam)
-      .subscribe(() => {
+      .subscribe((team) => {
+        team.user.push(this.user.userInfo.username);
         this.getAllTheTeams();
       });
   }

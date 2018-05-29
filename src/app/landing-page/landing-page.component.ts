@@ -26,7 +26,7 @@ export class LandingPageComponent {
     username: '',
     password: ''
   };
-  user: any;
+  user: any = this.myService.currentUser;
   error: any;
 
   login() {

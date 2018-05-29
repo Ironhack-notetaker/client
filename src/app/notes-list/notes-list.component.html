@@ -7,23 +7,38 @@
   
 </div>
 
-<button (click)="sort(allTheNotes)">Sort</button>
+<!-- <button (click)="sort(allTheNotes)">Sort</button>
 <div *ngFor="let oneNote of allTheNotes">
   <a routerLink="/notes/{{oneNote._id}}">{{oneNote.title}}</a>
-</div>
+</div> -->
 
 <h2>My notes</h2>
-<div *ngIf="this.user.userInfo !== null">
-  <div *ngFor="let favorite of this.user.userInfo.favorites">
-    <p>{{favorite || json}}</p>
-    <a routerLink="/notes/{{favorite._id}}">{{favorite.title}}</a>
-  </div>
+  <div *ngFor="let favorite of favoriteNotes">
+    <a routerLink="/notes/{{favorite}}">{{favorite.title}}</a>
+    <button (click)="removeMyNotes(user.userInfo._id, favorite._id, favorite)">Remove from favorites</button>
 </div>
 
 <button (click)="toggleForm()">Add New Note</button>
 <form *ngIf="isShowing">
   <label>Title</label>
   <input type="text" [(ngModel)]="newNote.title" name="title">
+  <label>Urgency</label>
+  <input type="radio" [(ngModel)]="newNote.urgency" name="urgency" id="urgencyChoice1" value="Urgent">
+  <label for="urgencyChoice1">Urgent</label>
+  <input type="radio" [(ngModel)]="newNote.urgency" name="urgency" id="urgencyChoice2" value="Important">
+  <label for="urgencyChoice2">Important</label>
+  <input type="radio" [(ngModel)]="newNote.urgency" name="urgency" id="urgencyChoice3" value="Not Important">
+  <label for="urgencyChoice3">Not Important</label>
+  <br>
+  <label>Status</label>
+  <input type="radio" [(ngModel)]="newNote.status" name="status" id="statusChoice1" value="N/A">
+  <label for="statusChoice1">N/A</label>
+  <input type="radio" [(ngModel)]="newNote.status" name="status" id="statusChoice2" value="Not Started">
+  <label for="statusChoice2">Unfinished</label>
+  <input type="radio" [(ngModel)]="newNote.status" name="status" id="statusChoice3" value="In Progress">
+  <label for="statusChoice3">In Progress</label>
+  <input type="radio" [(ngModel)]="newNote.status" name="status" id="statusChoice4" value="Complete">
+  <label for="statusChoice4">Finished</label>
   <button (click)="addNewNote()">Submit</button>
 </form>
 

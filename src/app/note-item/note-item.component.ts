@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class NoteItemComponent implements OnInit {
 
-  user: any;
+  user: any = this.authService.currentUser;
   theNote: any = {};
   theUpdate: any = {};
 

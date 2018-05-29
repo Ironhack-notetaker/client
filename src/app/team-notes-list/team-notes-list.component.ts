@@ -9,6 +9,9 @@ import {
   NoteService
 } from '../services/note.service';
 import {
+  AuthService
+} from '../services/auth.service';
+import {
   ActivatedRoute
 } from '@angular/router';
 
@@ -19,13 +22,15 @@ import {
 })
 export class TeamNotesListComponent implements OnInit {
 
+  user: any = this.authService.currentUser;
+
   isShowing: Boolean = false;
 
   allTheNotes: Array < any > = [];
 
   theTeam: any = {
-    user: '',
-    note: [],
+    user: [this.authService.currentUser.username],
+    note: [''],
     teamName: '',
     urgency: '',
     status: '',
@@ -35,7 +40,7 @@ export class TeamNotesListComponent implements OnInit {
   theUpdate: any = {};
 
   newNote: any = {
-    user: '',
+    user: this.authService.currentUser.username,
     title: '',
     text: '',
     status: '',
@@ -48,6 +53,7 @@ export class TeamNotesListComponent implements OnInit {
 
   constructor(private myService: TeamService,
     private noteService: NoteService,
+    private authService: AuthService,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
