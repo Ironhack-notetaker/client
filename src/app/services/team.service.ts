@@ -52,4 +52,9 @@ export class TeamService {
     .map((responseFromApi) => responseFromApi.json());
   }
 
+  addUserToTeam(teamId, body) {
+    return this.http.post(`http://localhost:3000/team/adduser/${teamId}`, body, {withCredentials: true})
+    .map((responseFromApi) => responseFromApi.json());
+  }
+
 }

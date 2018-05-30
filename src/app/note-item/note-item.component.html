@@ -1,20 +1,40 @@
-<a [routerLink]="['/notes']">Go back</a> <br>
-
 
 <label>Title</label>
 <input type="text" value="{{theNote.title}}" [(ngModel)]="theUpdate.title">
+Users:
+<p *ngFor="let user of theNote.user">{{user}}</p>
 
+<div *ngIf="this.user">
+  <div *ngFor="let favorite of this.user.userInfo.favorites">
+    <div *ngIf="favorite === theNote._id">
+      <div *ngIf="!wasClicked">
+        <button (click)="removeMyNotes(this.user.userInfo._id, favorite)">Remove from favorites</button> 
+      </div>
+    </div>
+  </div>
+</div>
 
-<editor apiKey="5h8cno0g0qjmtfev3xb5rwrs2eqke2ev09zpqy58stm3c5vw" 
-[init]="{plugins: 'link, lists, autolink, code, fullscreen, wordcount, table, tinymcespellchecker, image, imagetools'}" 
-[(ngModel)]="theUpdate.text" 
-name="text" 
-initialValue="{{theNote.text}}"
-menubar="false"
-toolbar="undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | table | link image | fullscreen">
+<editor 
+  apiKey="5h8cno0g0qjmtfev3xb5rwrs2eqke2ev09zpqy58stm3c5vw" 
+  [init]="{plugins: 'link, lists, autolink, code, fullscreen, wordcount, table, tinymcespellchecker, image, imagetools'}" 
+  [(ngModel)]="theUpdate.text" 
+  name="text" 
+  initialValue="{{theNote.text}}"
+  menubar="edit"
+  toolbar="undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | table | link image | fullscreen"
+  theme="mobile"
+  >
 </editor>
-<!-- <input name="text" value="{{theNote.text}}" [(ngModel)]="theUpdate.text" name="text"/> -->
-<div *ngIf="this.user.userInfo.username === theNote.user">
-  <button (click)="updateNote(theNote._id)">Submit Changes</button>
-  <button (click)="deleteNote(theNote._id)">Delete</button>
+
+<div *ngIf="theNote.user">
+  <div *ngIf="this.user">
+
+    <div *ngIf="theNote.user.includes(this.user.userInfo.username)">
+      <input type="text" [(ngModel)]="body.username" name="username">
+      <button (click)="addUser(theNote._id, body)">Invite a user to edit</button>
+      <button (click)="updateNote(theNote._id)">Submit Changes</button>
+      <button (click)="deleteNote(theNote._id)">Delete</button>
+    </div>
+
+  </div>
 </div>

@@ -19,8 +19,9 @@ export class DataService {
   }
 
   getData() {
-    document.getElementById('heading').innerHTML = localStorage['title'] || 'Title';
-    document.getElementById('content').innerHTML = localStorage['text'] || 'Content';
+    document.getElementById('heading').innerHTML = localStorage['title'] || 'Quick Note';
+    document.getElementById('content').innerHTML = localStorage['text'] ||
+    'This note is stored locally in your browser every second, so dont put any sensistive information here and dont worry about saving';
 
     setInterval(() => {
         localStorage['title'] = document.getElementById('heading').innerHTML;

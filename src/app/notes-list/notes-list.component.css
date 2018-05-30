@@ -1,0 +1,9 @@
+/* .custom-pagination {
+  display: block
+} */
+
+.custom-pagination a, .custom-pagination span {
+  float: left;
+  font-size: 25px;
+  margin: 5px;
+}

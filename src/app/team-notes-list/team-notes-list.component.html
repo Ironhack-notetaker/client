@@ -4,17 +4,25 @@
 <label>Team Name</label>
 <input type="text" value="{{theTeam.teamName}}" [(ngModel)]="theUpdate.teamName" name="teamName">
 
-<p>Notes:</p> <div *ngFor="let note of theTeam.note">
-  hi
+<p>Notes:</p> <div *ngFor="let note of teamNotes  ">
   <a routerLink="/notes/{{note._id}}">{{note.title}}</a>
+  <p>{{note.urgency}}</p>
+  {{note.status}}
 </div>
 
-
-<button (click)="updateThisTeam(theTeam._id)">Submit Changes</button>
-
-<button (click)="toggleForm()">Add New Note</button>
-<form *ngIf="isShowing">
-  <label>Title</label>
-  <input type="text" [(ngModel)]="newNote.title" name="title">
-  <button (click)="updateTeamsNotes(theTeam._id)">Create new note</button>
-</form>
+<div *ngIf="user">
+  <div *ngIf="theTeam.user.includes(user.userInfo.username)">
+    <input type="text" [(ngModel)]="body.username" name="username">
+    <button (click)="addUser(theTeam._id)">Invite a user to the team</button>
+    
+    
+    <button (click)="updateThisTeam(theTeam._id)">Submit Changes</button>
+    
+    <button (click)="toggleForm()">Add New Note</button>
+    <form *ngIf="isShowing">
+      <label>Title</label>
+      <input type="text" [(ngModel)]="newNote.title" name="title">
+      <button (click)="updateTeamsNotes(theTeam._id)">Create new note</button>
+    </form>
+  </div>
+</div>

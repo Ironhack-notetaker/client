@@ -19,6 +19,10 @@ export class QuickNoteComponent implements OnInit {
   private route: ActivatedRoute,
   private http: Http) { }
 
+  ngOnInit() {
+    this.saveQuickNote();
+  }
+
   saveQuickNote() {
     if (this.myService.hasData()) {
       const data = this.myService.getData();
@@ -30,26 +34,4 @@ export class QuickNoteComponent implements OnInit {
       });
     }
   }
-
-  ngOnInit() {
-    // this.route.params.subscribe((params) => {
-    //   const theUsername = (params['username']);
-    //   this.authService.getUsername(theUsername)
-    //   .subscribe((responseFromService) => {
-    //     this.user.userInfo.username = responseFromService;
-    //     console.log(responseFromService);
-    //   });
-    // });
-
-
-    this.saveQuickNote();
-  }
-
-  // getThisUsername(theUsername) {
-  //   this.myService.getUsername(theUsername)
-  //   .subscribe((response) => {
-  //     this.user = response;
-  //   });
-  // }
-
 }

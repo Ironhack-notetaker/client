@@ -2,9 +2,26 @@
   user-profile works!
 </p>
 <p>{{user | json}}</p>
+
+<h3>Favorites</h3>
 <div *ngFor="let favorite of userFavorites">
   <p><a routerLink="/notes/{{favorite._id}}">{{favorite.title}}</a></p>
 </div>
+
+<h3>My Notes</h3>
+<div *ngFor="let note of userNotes">
+  <ul>
+    <li *ngIf="note.user.includes(user.username)"><a routerLink="/notes/{{note._id}}">{{note.title}}</a></li>
+  </ul>
+</div>
+
+<h3>My Teams</h3>
+<div *ngFor="let team of userTeams">
+  <ul>
+    <li *ngIf="team.user.includes(user.username)"><a routerLink="/teams/{{team._id}}">{{team.teamName}}</a></li>
+  </ul>
+</div>
+
 <form>
   <label>Bio</label>
   <input type="text" value="this.user.bio" [(ngModel)]="formInfo.bio" name="bio">

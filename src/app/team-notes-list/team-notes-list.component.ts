@@ -23,13 +23,11 @@ import {
 export class TeamNotesListComponent implements OnInit {
 
   user: any = this.authService.currentUser;
-
   isShowing: Boolean = false;
-
   allTheNotes: Array < any > = [];
-
   teamNotes: any = [];
-
+  theUpdate: any = {};
+  body: any = {username: ''};
   theTeam: any = {
     user: [''],
     note: [''],
@@ -38,9 +36,6 @@ export class TeamNotesListComponent implements OnInit {
     status: '',
     theme: ['']
   };
-
-  theUpdate: any = {};
-
   newNote: any = {
     user: '',
     title: '',
@@ -53,7 +48,8 @@ export class TeamNotesListComponent implements OnInit {
     format: ''
   };
 
-  constructor(private myService: TeamService,
+  constructor(
+    private myService: TeamService,
     private noteService: NoteService,
     private authService: AuthService,
     private route: ActivatedRoute,
@@ -65,8 +61,12 @@ export class TeamNotesListComponent implements OnInit {
       this.myService.getOneTeam(theId)
         .subscribe((responseFromService) => {
           this.theTeam = responseFromService;
+          this.myService.getTeamNotes(this.theTeam._id)
+          .subscribe((notes) => {
+            this.teamNotes = notes;
+          });
         });
-    });
+      });
 
     this.authService.isLoggedIn()
     .toPromise()
@@ -81,10 +81,7 @@ export class TeamNotesListComponent implements OnInit {
       this.router.navigate(['/welcome']);
     });
 
-    this.myService.getTeamNotes(this.theTeam._id)
-    .subscribe((response) => {
-      this.theTeam = response.notes;
-    });
+
   }
 
   toggleForm() {
@@ -138,6 +135,13 @@ export class TeamNotesListComponent implements OnInit {
     .subscribe(() => {
       this.getOneTeam(theTeamId);
       this.newNote.title = '';
+    });
+  }
+
+  addUser(teamId) {
+    this.myService.addUserToTeam(teamId, this.body)
+    .subscribe(() => {
+      this.router.navigate(['/teams']);
     });
   }
 

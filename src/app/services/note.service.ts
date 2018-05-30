@@ -37,18 +37,23 @@ export class NoteService {
     .map((responseFromApi) => responseFromApi.json());
   }
 
-  favoriteNote(theId, theNoteId, theNote) {
-    return this.http.post(`http://localhost:3000/api/favorites/${theId}/${theNoteId}`, theNote, {withCredentials: true})
+  favoriteNote(theId, theNoteId) {
+    return this.http.post(`http://localhost:3000/api/favorites/${theId}/${theNoteId}`, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
-  removeFavorite(theId, theNoteId, theNote) {
-    return this.http.post(`http://localhost:3000/api/removefavorite/${theId}/${theNoteId}`, theNote, {withCredentials: true})
+  removeFavorite(theId, theNoteId) {
+    return this.http.post(`http://localhost:3000/api/removefavorite/${theId}/${theNoteId}`, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
   getFavorites() {
     return this.http.get('http://localhost:3000/api/getfavorites', {withCredentials: true})
+    .map((responseFromApi) => responseFromApi.json());
+  }
+
+  addUserToNote(noteId, body) {
+    return this.http.post(`http://localhost:3000/note/adduser/${noteId}`, body, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 

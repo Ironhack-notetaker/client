@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 import { NoteService } from '../services/note.service';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,9 +15,12 @@ export class UserProfileComponent implements OnInit {
   user: any;
   error: string;
   userFavorites: any = [];
+  userNotes: any = [];
+  userTeams: any = [];
 
   constructor( private authService: AuthService,
     private noteService: NoteService,
+    private teamService: TeamService,
     private router: Router ) { }
 
   ngOnInit() {
@@ -43,6 +47,9 @@ export class UserProfileComponent implements OnInit {
     .subscribe((favorites) => {
       this.userFavorites = favorites;
     });
+
+    this.getUserNotes();
+    this.getAllTheTeams();
   }
 
   updateUserInfo() {
@@ -52,6 +59,18 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  getUserNotes() {
+    this.noteService.getAllNotes()
+    .subscribe((response) => {
+      this.userNotes = response;
+    });
+  }
 
+  getAllTheTeams() {
+    this.teamService.getAllTeams()
+      .subscribe((teamList) => {
+        this.userTeams = teamList;
+      });
+  }
 
 }

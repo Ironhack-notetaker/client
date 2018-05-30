@@ -8,7 +8,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { EditorModule } from '@tinymce/tinymce-angular';
-// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 // Components and services
 import { AppComponent } from './app.component';
@@ -23,6 +23,7 @@ import { TeamsListComponent } from './teams-list/teams-list.component';
 import { TeamNotesListComponent } from './team-notes-list/team-notes-list.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { QuickNoteComponent } from './quick-note/quick-note.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full'},
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'teams/:id', component: TeamNotesListComponent },
   { path: 'welcome', component: LandingPageComponent },
   { path: 'quicky', component: QuickNoteComponent },
+  { path: 'about', component: AboutUsComponent }
  ];
 
 @NgModule({
@@ -44,18 +46,19 @@ const routes: Routes = [
     TeamsListComponent,
     TeamNotesListComponent,
     LandingPageComponent,
-    QuickNoteComponent
+    QuickNoteComponent,
+    AboutUsComponent
   ],
   imports: [
   HttpModule,
   BrowserModule,
   FormsModule,
+  NgxPaginationModule,
   RouterModule.forRoot(routes),
   BsDropdownModule.forRoot(),
   TooltipModule.forRoot(),
   ModalModule.forRoot(),
   EditorModule
-  // NgbModule.forRoot(),
   ],
   providers: [AuthService, NoteService, TeamService, DataService],
   bootstrap: [AppComponent]

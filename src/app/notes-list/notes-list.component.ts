@@ -1,19 +1,29 @@
 import {
   Component,
-  OnInit
+  OnInit,
+  ChangeDetectionStrategy,
+  Input
 } from '@angular/core';
+
 import {
   NoteService
 } from '../services/note.service';
+
 import {
   AuthService
 } from '../services/auth.service';
+
 import {
   ActivatedRoute
 } from '@angular/router';
+
 import {
   Router
 } from '@angular/router';
+
+import {
+  PaginationInstance
+} from 'ngx-pagination';
 
 
 @Component({
@@ -23,21 +33,14 @@ import {
 })
 export class NotesListComponent implements OnInit {
 
-  public user: any = this.authService.currentUser;
-
+  user: any = this.authService.currentUser;
   allTheNotes: Array<any> = [];
-
   isShowing: Boolean = false;
-
   noteResults: Array<any> = this.allTheNotes;
-
   sortedNotes: any = this.allTheNotes;
-
   favoriteNotes: any = [];
-
   singleNote: any;
-
-  // Add user to newNote.user
+  searchText: any;
   newNote: any = {
     user: '',
     title: '',
@@ -48,6 +51,12 @@ export class NotesListComponent implements OnInit {
     date: Date.now(),
     theme: '',
     format: ''
+  };
+
+  public config: PaginationInstance = {
+    id: 'custom',
+    itemsPerPage: 10,
+    currentPage: 1
   };
 
   constructor(private noteService: NoteService,
@@ -64,7 +73,6 @@ export class NotesListComponent implements OnInit {
         }
       })
       .catch(err => {
-        console.log('err in notes: ', err);
         this.router.navigate(['/welcome']);
       });
 
@@ -77,6 +85,10 @@ export class NotesListComponent implements OnInit {
       this.getAllTheNotes();
     }
 
+  toggleForm() {
+    this.isShowing = !this.isShowing;
+  }
+
   logout() {
     this.authService.logout();
   }
@@ -88,9 +100,6 @@ export class NotesListComponent implements OnInit {
       });
   }
 
-  toggleForm() {
-    this.isShowing = !this.isShowing;
-  }
 
   search(searchText) {
     this.noteResults = this.allTheNotes.filter(notes => {
@@ -99,15 +108,16 @@ export class NotesListComponent implements OnInit {
     this.getAllTheNotes();
   }
 
-  myNotes(theId, noteId, note) {
-    this.noteService.favoriteNote(theId, noteId, note)
+  myNotes(theId, noteId) {
+    this.noteService.favoriteNote(theId, noteId)
       .subscribe(() => {
         this.getAllTheNotes();
       });
+      this.router.navigate(['/notes']);
   }
 
-  removeMyNotes(theId, noteId, note) {
-    this.noteService.removeFavorite(theId, noteId, note)
+  removeMyNotes(theId, noteId) {
+    this.noteService.removeFavorite(theId, noteId)
     .subscribe(() => {
       this.getAllTheNotes();
     });

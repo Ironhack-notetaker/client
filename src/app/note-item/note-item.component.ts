@@ -1,7 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { NoteService } from '../services/note.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import {
+  Component,
+  OnInit,
+  AfterViewInit
+} from '@angular/core';
+import {
+  NoteService
+} from '../services/note.service';
+import {
+  ActivatedRoute,
+  Router
+} from '@angular/router';
+import {
+  AuthService
+} from '../services/auth.service';
 
 @Component({
   selector: 'app-note-item',
@@ -13,26 +24,14 @@ export class NoteItemComponent implements OnInit {
   user: any = this.authService.currentUser;
   theNote: any = {};
   theUpdate: any = {};
+  allTheNotes: Array<any> = [];
+  body: any = {username: ''};
+  wasClicked: Boolean = false;
 
   constructor(private myService: NoteService,
-  private authService: AuthService,
-  private route: ActivatedRoute,
-  private router: Router) { }
-
-  getOneNote(theId) {
-    this.myService.getOneNote(theId)
-    .subscribe((response) => {
-      this.theNote = response;
-    });
-  }
-
-  updateNote(theId) {
-    this.myService.updateNote(theId, this.theUpdate)
-    .subscribe(() => {
-      this.getOneNote(theId);
-      this.theUpdate = {};
-    });
-  }
+    private authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router) {}
 
   ngOnInit() {
     this.authService.isLoggedIn()
@@ -50,12 +49,65 @@ export class NoteItemComponent implements OnInit {
       });
 
     this.route.params.subscribe((params) => {
-        const theId = (params['id']);
-        this.myService.getOneNote(theId)
+      const theId = (params['id']);
+      this.myService.getOneNote(theId)
         .subscribe((responseFromService) => {
           this.theNote = responseFromService;
         });
     });
+  }
 
+
+  getOneNote(theId) {
+    this.myService.getOneNote(theId)
+      .subscribe((response) => {
+        this.theNote = response;
+      });
+  }
+
+  removeMyNotes(theId, noteId) {
+    this.myService.removeFavorite(theId, noteId)
+    .subscribe(() => {
+      this.getAllTheNotes();
+    });
+    this.wasClicked = true;
+  }
+
+  myNotes(theId, noteId) {
+    this.myService.favoriteNote(theId, noteId)
+      .subscribe(() => {
+        this.getAllTheNotes();
+      });
+      this.router.navigate(['/notes']);
+  }
+
+  updateNote(theId) {
+    this.myService.updateNote(theId, this.theUpdate)
+      .subscribe(() => {
+        this.getOneNote(theId);
+        this.theUpdate = {};
+      });
+  }
+
+  getAllTheNotes() {
+    this.myService.getAllNotes()
+      .subscribe((theList) => {
+        this.allTheNotes = theList;
+      });
+    this.myService.getFavorites();
+  }
+
+  deleteNote(theId) {
+    this.myService.deleteNote(theId)
+    .subscribe(() => {
+      this.getAllTheNotes();
+    });
+  }
+
+  addUser(noteId) {
+    this.myService.addUserToNote(noteId, this.body)
+    .subscribe(() => {
+      this.router.navigate(['/notes']);
+    });
   }
 }

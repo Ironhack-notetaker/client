@@ -6,7 +6,11 @@
     
     <div *ngFor="let oneTeam of allTheTeams">
       <a routerLink="/teams/{{oneTeam._id}}">{{oneTeam.teamName}}</a>
-      <button (click)="deleteTeam(oneTeam._id)">Delete</button>
+      <h4>Members: </h4>
+      <div *ngFor="let user of oneTeam.user">
+        <p>{{user}}</p>
+      </div>
+      <!-- <button (click)="deleteTeam(oneTeam._id)">Delete</button> -->
     </div>
     
     <button (click)="toggleForm()">Create New Team</button>
