@@ -1,11 +1,7 @@
-<p>
-  user-profile works!
-</p>
-<p>{{user | json}}</p>
-
 <h3>Favorites</h3>
 <div *ngFor="let favorite of userFavorites">
   <p><a routerLink="/notes/{{favorite._id}}">{{favorite.title}}</a></p>
+  <button (click)="removeFavorite(user._id, favorite._id)">Remove from favorites</button>
 </div>
 
 <h3>My Notes</h3>
@@ -24,6 +20,6 @@
 
 <form>
   <label>Bio</label>
-  <input type="text" value="this.user.bio" [(ngModel)]="formInfo.bio" name="bio">
+  <input type="text" value="user.bio" [(ngModel)]="formInfo.bio" name="bio">
   <button (click)="updateUserInfo()">Update</button>
 </form>

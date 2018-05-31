@@ -73,12 +73,11 @@ export class NoteItemComponent implements OnInit {
     this.wasClicked = true;
   }
 
-  myNotes(theId, noteId) {
+  favoriteNote(theId, noteId) {
     this.myService.favoriteNote(theId, noteId)
       .subscribe(() => {
         this.getAllTheNotes();
       });
-      this.router.navigate(['/notes']);
   }
 
   updateNote(theId) {
@@ -87,6 +86,7 @@ export class NoteItemComponent implements OnInit {
         this.getOneNote(theId);
         this.theUpdate = {};
       });
+    this.refresh();
   }
 
   getAllTheNotes() {
@@ -106,8 +106,13 @@ export class NoteItemComponent implements OnInit {
 
   addUser(noteId) {
     this.myService.addUserToNote(noteId, this.body)
-    .subscribe(() => {
-      this.router.navigate(['/notes']);
-    });
+      .subscribe(() => {
+        this.getAllTheNotes();
+      });
+    // this.refresh();
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 }

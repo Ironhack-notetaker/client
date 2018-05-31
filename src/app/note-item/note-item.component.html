@@ -1,17 +1,32 @@
 
 <label>Title</label>
-<input type="text" value="{{theNote.title}}" [(ngModel)]="theUpdate.title">
-Users:
+<div *ngIf="this.user && theNote.user">
+  <div *ngIf="theNote.user.includes(this.user.userInfo.username)">
+    <input type="text" value="{{theNote.title}}" [(ngModel)]="theUpdate.title">
+  </div>
+  <div *ngIf="!theNote.user.includes(this.user.userInfo.username)">
+      <input type="text" value="{{theNote.title}}" readonly>
+  </div>
+</div>
+
+<p>Users:</p>
 <p *ngFor="let user of theNote.user">{{user}}</p>
 
 <div *ngIf="this.user">
+
   <div *ngFor="let favorite of this.user.userInfo.favorites">
     <div *ngIf="favorite === theNote._id">
+      
       <div *ngIf="!wasClicked">
         <button (click)="removeMyNotes(this.user.userInfo._id, favorite)">Remove from favorites</button> 
       </div>
+      <div *ngIf="wasClicked">
+        <button (click)="favoriteNote(this.user.userInfo._id, favorite)">Add to favorites</button>
+      </div>
+      
     </div>
   </div>
+
 </div>
 
 <editor 
@@ -20,10 +35,11 @@ Users:
   [(ngModel)]="theUpdate.text" 
   name="text" 
   initialValue="{{theNote.text}}"
-  menubar="edit"
+  menubar="false"
   toolbar="undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | table | link image | fullscreen"
-  theme="mobile"
+  class="text-editor"
   >
+  <!-- [inline]="true" -->
 </editor>
 
 <div *ngIf="theNote.user">

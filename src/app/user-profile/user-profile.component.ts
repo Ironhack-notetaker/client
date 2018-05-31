@@ -38,15 +38,15 @@ export class UserProfileComponent implements OnInit {
       });
 
     this.authService.getUserInfo()
-    .subscribe((user) => {
-      this.user = user;
-      console.log('user from user profile page', this.user);
-    });
+      .subscribe((user) => {
+        this.user = user;
+        console.log('user from user profile page', this.user);
+      });
 
     this.noteService.getFavorites()
-    .subscribe((favorites) => {
-      this.userFavorites = favorites;
-    });
+      .subscribe((favorites) => {
+        this.userFavorites = favorites;
+      });
 
     this.getUserNotes();
     this.getAllTheTeams();
@@ -54,16 +54,16 @@ export class UserProfileComponent implements OnInit {
 
   updateUserInfo() {
     this.authService.updateUserInfo(this.formInfo)
-    .subscribe(() => {
-      this.formInfo = {};
-    });
+      .subscribe(() => {
+        this.formInfo = {};
+      });
   }
 
   getUserNotes() {
     this.noteService.getAllNotes()
-    .subscribe((response) => {
-      this.userNotes = response;
-    });
+      .subscribe((response) => {
+        this.userNotes = response;
+      });
   }
 
   getAllTheTeams() {
@@ -71,6 +71,17 @@ export class UserProfileComponent implements OnInit {
       .subscribe((teamList) => {
         this.userTeams = teamList;
       });
+  }
+
+  removeFavorite(theId, noteId): void {
+    this.noteService.removeFavorite(theId, noteId)
+      .subscribe(() => {
+      });
+      this.refresh();
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 
 }

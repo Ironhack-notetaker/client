@@ -108,22 +108,22 @@ export class NotesListComponent implements OnInit {
     this.getAllTheNotes();
   }
 
-  myNotes(theId, noteId) {
+  myNotes(theId, noteId): void {
     this.noteService.favoriteNote(theId, noteId)
-      .subscribe(() => {
-        this.getAllTheNotes();
+      .subscribe((favorite) => {
+        this.favoriteNotes = favorite;
       });
-      this.router.navigate(['/notes']);
+      this.refresh();
   }
 
-  removeMyNotes(theId, noteId) {
-    this.noteService.removeFavorite(theId, noteId)
-    .subscribe(() => {
-      this.getAllTheNotes();
-    });
-  }
+  // removeMyNotes(theId, noteId): void {
+  //   this.noteService.removeFavorite(theId, noteId)
+  //   .subscribe(() => {
+  //     this.getAllTheNotes();
+  //   });
+  // }
 
-  getAllTheNotes() {
+  getAllTheNotes(): void {
     this.noteService.getAllNotes()
       .subscribe((theList) => {
         this.allTheNotes = theList;
@@ -131,23 +131,25 @@ export class NotesListComponent implements OnInit {
     this.noteService.getFavorites();
   }
 
-  deleteNote(theId) {
+  deleteNote(theId): void {
     this.noteService.deleteNote(theId)
       .subscribe(() => {
         this.getAllTheNotes();
       });
   }
 
-  addNewNote() {
+  addNewNote(): void {
     this.noteService.createNote(this.newNote)
       .subscribe(() => {
         this.getAllTheNotes();
       });
   }
 
-  sort(notes) {
-    this.allTheNotes.sort();
+  sort(notes): void {
+    notes.sort();
   }
 
-
+  refresh(): void {
+    window.location.reload();
+  }
 }

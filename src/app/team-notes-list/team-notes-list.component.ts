@@ -141,7 +141,7 @@ export class TeamNotesListComponent implements OnInit {
   addUser(teamId) {
     this.myService.addUserToTeam(teamId, this.body)
     .subscribe(() => {
-      this.router.navigate(['/teams']);
+      this.myService.getAllTeams();
     });
   }
 
