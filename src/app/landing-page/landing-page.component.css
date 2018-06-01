@@ -31,7 +31,6 @@
   font-size: 16px;
   width: 100%;
   margin-bottom: 10px;
-  -webkit-appearance: none;
   background: #fff;
   border: 1px solid #d9d9d9;
   border-top: 1px solid #c0c0c0;
@@ -113,11 +112,11 @@ body {
   background-image: url('http://webdesigndl.com/uploads/posts/2014-03/1393686306_paper-notebook-psd.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  height: calc(100vh - 102px);
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  padding-bottom: 60px;
+  padding-bottom: 100px;
   }
 
   .buttonContainer {
@@ -133,6 +132,8 @@ body {
     justify-content: space-between;
     align-items: center;
     height: 500px;
+    position: relative;
+    top: 100px;
   }
 
   .landingPageWelcomePhrase {

@@ -20,7 +20,6 @@ import {
 import {
   Router
 } from '@angular/router';
-
 import {
   PaginationInstance
 } from 'ngx-pagination';

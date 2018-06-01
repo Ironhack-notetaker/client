@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.authService.currentUser);
     this.authService.isLoggedIn()
       .toPromise()
       .then(() => {
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit {
         },
         (err) => this.error = err
       );
+      window.location.reload();
   }
 
 

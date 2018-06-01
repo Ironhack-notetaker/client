@@ -57,6 +57,7 @@ export class UserProfileComponent implements OnInit {
       .subscribe(() => {
         this.formInfo = {};
       });
+      window.location.reload();
   }
 
   getUserNotes() {

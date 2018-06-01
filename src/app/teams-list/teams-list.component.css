@@ -1,0 +1,90 @@
+table {
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+	background: linear-gradient(#333 0%,#444 100%);
+	color: #FFF; font-weight: bold;
+  height: 40px;
+  padding: 10px;
+}
+
+tr:first-child th:first-child { 
+  border-radius: 5px 0 0 0; 
+} 
+
+tr:first-child th:last-child { 
+  border-radius: 0 5px 0 0; 
+}
+
+td {
+  height: 40px;
+  padding: 5px;
+}
+
+td:hover {
+  background-color: rgb(233, 233, 233);
+}
+
+tr:nth-child(even) td { 
+  background: #F1F1F1;
+}
+
+tr:nth-child(odd) td { 
+  background: rgb(212, 212, 212);
+}
+
+tr:nth-child(even) td:hover { 
+  background-color: rgb(233, 233, 233);
+}
+
+tr:nth-child(odd) td:hover { 
+  background-color: rgb(233, 233, 233);
+}
+
+.center {
+  text-align: center;
+  padding: 0;
+}
+
+.float-left {
+  float: left;
+}
+
+.custom-pagination {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.custom-pagination a, .custom-pagination span {
+  float: left;
+  font-size: 25px;
+}
+
+.pagination-next {
+  margin-top: 10px;
+}
+
+.pagination-previous {
+  margin-top: 10px;
+}
+
+.page-numbers {
+  width: 300px;
+}
+
+.custom-pagination span {
+  margin: 5px;  
+  padding: 5px 10px;
+}
+
+.center {
+  text-align: center;
+}

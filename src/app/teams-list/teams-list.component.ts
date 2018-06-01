@@ -14,6 +14,9 @@ import {
 import {
   AuthService
 } from '../services/auth.service';
+import {
+  PaginationInstance
+} from 'ngx-pagination';
 
 @Component({
   selector: 'app-teams-list',
@@ -37,6 +40,11 @@ export class TeamsListComponent implements OnInit {
     theme: ['']
   };
 
+  public config: PaginationInstance = {
+    id: 'custom',
+    itemsPerPage: 10,
+    currentPage: 1
+  };
 
   constructor(private myService: TeamService,
     private authService: AuthService,
