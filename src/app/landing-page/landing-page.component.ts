@@ -32,7 +32,11 @@ export class LandingPageComponent {
   login() {
     this.myService.login(this.formInfo)
       .subscribe(
-        (user) => this.user = user,
+        (user) => {
+          this.user = user;
+          this.formInfo = {};
+          this.router.navigate(['/user']);
+        },
         (err) => this.error = err
       );
   }
@@ -43,6 +47,8 @@ export class LandingPageComponent {
         (user) => {
           this.user = user;
           console.log('user:', this.user);
+          this.formInfo = {};
+          this.router.navigate(['/user']);
         },
         (err) => this.error = err
       );

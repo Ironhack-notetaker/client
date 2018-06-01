@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<!-- <nav class="navbar navbar-default">
   <div class="container-fluid">
       <div class="navbar-header">
           <a class="navbar-brand">
@@ -27,4 +27,31 @@
     </ul>
   </div>
 </nav>
+<router-outlet></router-outlet> -->
+
+<nav class="navbar navbar-inverse nav">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand">
+          <img src="https://i.pinimg.com/originals/d3/e4/79/d3e4793d5808b8b7be683c40de53b909.png" 
+          class="logo" style="width: 40px">
+        </a>
+        <a class="navbar-brand" [routerLink] = "['/welcome']"> Note Taker</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a [routerLink] = "['/user']">Profile</a></li>
+        <li><a [routerLink] = "['/teams']">Teams</a></li>
+        <li><a [routerLink] = "['/notes']">Notes</a></li>
+        <li><a [routerLink] = "['/about']">About</a></li>
+        
+        <li *ngIf="authService.currentUser"><a (click)="logout()" [routerLink] = "['/welcome']">Logout</a></li>
+        
+      </ul>
+      
+      <div class="navbar  navbar-inverse navbar-fixed-bottom"></div>
+    </div>
+  </nav>
+  
 <router-outlet></router-outlet>
+
+
