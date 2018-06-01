@@ -14,6 +14,9 @@ import {
 import {
   ActivatedRoute, Router
 } from '@angular/router';
+import {
+  PaginationInstance
+} from 'ngx-pagination';
 
 @Component({
   selector: 'app-team-notes-list',
@@ -40,12 +43,18 @@ export class TeamNotesListComponent implements OnInit {
     user: '',
     title: '',
     text: '',
-    status: '',
+    status: 'Unfinished',
     urgency: '',
     category: '',
     date: Date.now(),
     theme: '',
     format: ''
+  };
+
+  public config: PaginationInstance = {
+    id: 'custom',
+    itemsPerPage: 10,
+    currentPage: 1
   };
 
   constructor(
@@ -97,29 +106,15 @@ export class TeamNotesListComponent implements OnInit {
   }
 
   addNewNote() {
-    const newOneNote = {
-      user: this.newNote.user,
-      title: this.newNote.title,
-      text: this.newNote.text,
-      status: this.newNote.status,
-      urgency: this.newNote.urgency,
-      category: this.newNote.category,
-      date: Date.now(),
-      theme: this.newNote.theme,
-      format: this.newNote.format
-    };
-
     this.noteService.createNote(this.newNote)
       .subscribe(() => {
-        this.myService.getOneTeam(this.theTeam._id)
-          .subscribe((thisUpdatedTeam) => {
-            thisUpdatedTeam.note.push(newOneNote);
-            this.updateThisTeam(this.theTeam._id);
-            console.log(thisUpdatedTeam);
-          });
       });
-    this.toggleForm();
-    return newOneNote;
+      this.myService.updateTeamNotes(this.theTeam._id, this.newNote)
+        .subscribe((thisUpdatedTeam) => {
+          // this.updateTeamsNotes(thisUpdatedTeam._id);
+          console.log(thisUpdatedTeam);
+        });
+      window.location.reload();
   }
 
   updateThisTeam(theId) {
@@ -134,7 +129,7 @@ export class TeamNotesListComponent implements OnInit {
     this.myService.updateTeamNotes(theTeamId, this.addNewNote())
     .subscribe(() => {
       this.getOneTeam(theTeamId);
-      this.newNote.title = '';
+      // this.newNote.title = '';
     });
   }
 
@@ -143,6 +138,10 @@ export class TeamNotesListComponent implements OnInit {
     .subscribe(() => {
       this.myService.getAllTeams();
     });
+  }
+
+  refresh(): void {
+    window.location.reload();
   }
 
 }

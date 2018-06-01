@@ -38,7 +38,6 @@
     <th class="center">Favorite</th>
   </tr>
   <tr *ngFor="let note of allTheNotes | paginate: config">
-    
     <td *ngIf="note.urgency === 'Urgent'" class="center red">{{note.urgency}}</td>
     <td *ngIf="note.urgency === 'Important'" class="center yellow">{{note.urgency}}</td>
     <td *ngIf="note.urgency === 'Not Important'" class="center">{{note.urgency}}</td>
@@ -51,20 +50,19 @@
     </div>
     <div *ngIf="user.userInfo.favorites.includes(note._id)">
         <td class="favorite"><p class="center"><i>In favorites</i></p></td>
-      </div>
+    </div>
   </tr>
 </table>
 
 <div class="pagination-container">
   <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
-    
     <div class="custom-pagination">
       
-      <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
-        <a *ngIf="!p.isFirstPage()" (click)="p.previous()"> < </a>
+      <div [class.disabled]="p.isFirstPage()">
+        <a *ngIf="!p.isFirstPage()" (click)="p.previous()" class="pagination-previous"> Back </a>
       </div>
   
-      <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value">
+      <div *ngFor="let page of p.pages" [class.current]="p.getCurrent() === page.value" class="page-numbers">
         <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
           <span>{{ page.label }}</span>
         </a>
@@ -73,10 +71,9 @@
         </div>
       </div>
   
-      <div class="pagination-next" [class.disabled]="p.isLastPage()">
-        <a *ngIf="!p.isLastPage()" (click)="p.next()"> > </a>
+      <div [class.disabled]="p.isLastPage()">
+        <a *ngIf="!p.isLastPage()" (click)="p.next()" class="pagination-next"> Next </a>
       </div>
-  
     </div>
     
   </pagination-template>
@@ -84,9 +81,11 @@
 
 <br><br><br><br><br>
 
-<h3 class="center">Or search for them by title</h3>
+<h3 class="center" style="margin: 10px;">Or search for them by title</h3>
 <input placeholder="Search" class="search-bar" [(ngModel)]='searchText' (keyup)="search(searchText)">
-<div *ngFor="let oneNote of noteResults"  class="search-container">
-  <a routerLink="/notes/{{oneNote._id}}" class="search-links">{{oneNote.title}} by: {{oneNote.user}}</a>
+<div class="search-box">
+  <div *ngFor="let oneNote of noteResults"  class="search-container">
+    <a routerLink="/notes/{{oneNote._id}}" class="search-links">{{oneNote.title}} <i>by: {{oneNote.user}}</i></a>
+  </div>
 </div>
 

@@ -1,0 +1,235 @@
+.custom-pagination {
+  display: block;
+  margin: 0 auto;
+  width: 600px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.custom-pagination a, .custom-pagination span {
+  float: left;
+  font-size: 25px;
+}
+
+.pagination-next {
+  margin-top: 10px;
+}
+
+.pagination-previous {
+  margin-top: 10px;
+}
+
+.page-numbers {
+  width: 300px;
+}
+
+.custom-pagination span {
+  margin: 5px;  
+  padding: 5px 10px;
+}
+
+table {
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+th {
+	background: linear-gradient(#333 0%,#444 100%);
+	color: #FFF; font-weight: bold;
+	height: 40px;
+}
+
+tr:first-child th:first-child { 
+  border-radius: 5px 0 0 0; 
+} 
+
+tr:first-child th:last-child { 
+  border-radius: 0 5px 0 0; 
+}
+
+td {
+  height: 30px;
+  padding: 5px;
+}
+
+td:hover {
+  background-color: rgb(233, 233, 233);
+}
+
+tr:nth-child(even) td { 
+  background: #F1F1F1;
+}
+
+tr:nth-child(odd) td { 
+  background: rgb(212, 212, 212);
+}
+
+tr:nth-child(even) td:hover { 
+  background-color: rgb(233, 233, 233);
+}
+
+tr:nth-child(odd) td:hover { 
+  background-color: rgb(233, 233, 233);
+}
+
+.contributors {
+  float: left;
+  display: block;
+  margin: 0 auto;
+  max-width: 100px;
+}
+
+.favorite {
+  width: 15%;
+}
+
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-left: 10px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+.radio-heading {
+  font-size: 30px;
+  text-align: center;
+  margin: 10px;
+}
+
+.center {
+  text-align: center;
+  vertical-align: middle;
+  /* display: block; */
+  margin: 0 auto;
+}
+
+.title-input {
+  height: 30px;
+  display: block;
+  margin: 0 auto;
+  font-size: 20px;
+}
+
+.title-label {
+  font-size: 25px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.pagination-container {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+}
+
+.red {
+  color: red;
+}
+
+.yellow {
+  color: rgb(155, 155, 0);
+}
+
+.btn {
+  margin: 10px;
+  padding: 5px;
+}
+
+.modals {
+  display: block;
+  margin-top: 70px;
+}
+
+.search-bar {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  text-align: center;
+  height: 40px;
+  font-size: 20px;
+}
+
+.search-links {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  color: black;
+}
+
+.search-container {
+  width: 300px;
+  display: block;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid rgb(209, 208, 208);
+}
+
+.search-box {
+  display: block;
+  margin: 0 auto;
+  background-color: white;
+  width: 300px;
+  border: 1px solid lightgray;
+}
+

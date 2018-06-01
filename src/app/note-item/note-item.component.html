@@ -2,7 +2,7 @@
 
   <div *ngIf="theNote.user">
     <div *ngIf="this.user">
-      
+      <p class="error"> {{ error }} </p>
       <h2>{{theNote.title}}</h2>
       <h3>Contributors:</h3>
       <div class="cont-container">
@@ -60,6 +60,7 @@
           <div class="modal-footer">
             <button data-dismiss="modal" (click)="addUser(theNote._id, body)" class="btn btn-primary">Confirm</button>
             <button data-dismiss="modal" class="btn btn-primary">Cancel</button>
+         
           </div>
         </div>
       </div>

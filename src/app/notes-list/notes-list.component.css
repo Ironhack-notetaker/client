@@ -1,6 +1,9 @@
 .custom-pagination {
   display: block;
   margin: 0 auto;
+  width: 600px;
+  margin-top: 10px;
+  align-items: center;
 }
 
 .custom-pagination a, .custom-pagination span {
@@ -8,16 +11,21 @@
   font-size: 25px;
 }
 
-.custom-pagination span {
-  margin: 5px;
-  border: 1px solid black;
-  border-radius: 10px;  
-  padding: 5px 10px;
+.pagination-next {
+  margin-top: 10px;
 }
 
 .pagination-previous {
-  margin: 5px;
+  margin-top: 10px;
+}
 
+.page-numbers {
+  width: 300px;
+}
+
+.custom-pagination span {
+  margin: 5px;  
+  padding: 5px 10px;
 }
 
 table {
@@ -53,9 +61,17 @@ td:hover {
 
 tr:nth-child(even) td { 
   background: #F1F1F1;
- }
+}
+
+tr:nth-child(odd) td { 
+  background: rgb(212, 212, 212);
+}
 
 tr:nth-child(even) td:hover { 
+  background-color: rgb(233, 233, 233);
+}
+
+tr:nth-child(odd) td:hover { 
   background-color: rgb(233, 233, 233);
 }
 
@@ -75,6 +91,7 @@ tr:nth-child(even) td:hover {
   display: block;
   position: relative;
   padding-left: 35px;
+  margin-left: 10px;
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 22px;
@@ -136,6 +153,7 @@ tr:nth-child(even) td:hover {
 .radio-heading {
   font-size: 30px;
   text-align: center;
+  margin: 10px;
 }
 
 .btn-primary {
@@ -196,6 +214,7 @@ tr:nth-child(even) td:hover {
   display: block;
   margin: 0 auto;
   text-align: center;
+  color: black;
 }
 
 .search-container {
@@ -203,4 +222,14 @@ tr:nth-child(even) td:hover {
   display: block;
   padding: 10px;
   text-align: center;
+  border-bottom: 1px solid rgb(209, 208, 208);
 }
+
+.search-box {
+  display: block;
+  margin: 0 auto;
+  background-color: white;
+  width: 300px;
+  border: 1px solid lightgray;
+}
+
