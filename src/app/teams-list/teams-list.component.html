@@ -1,17 +1,16 @@
+
 <div>
-    <div *ngIf="user" >
    
-    
     <a [routerLink]="['/welcome']">Go back</a>
     
-    <div *ngFor="let oneTeam of allTheTeams">
+    <!-- <div *ngFor="let oneTeam of allTheTeams">
       <a routerLink="/teams/{{oneTeam._id}}">{{oneTeam.teamName}}</a>
       <h4>Members: </h4>
       <div *ngFor="let user of oneTeam.user">
         <p>{{user}}</p>
       </div>
-      <!-- <button (click)="deleteTeam(oneTeam._id)">Delete</button> -->
-    </div>
+      <button (click)="deleteTeam(oneTeam._id)">Delete</button>
+    </div> -->
     
     <button (click)="toggleForm()">Create New Team</button>
     <form *ngIf="isShowing">
@@ -20,6 +19,29 @@
       <button (click)="addNewTeam()">Submit</button>
     </form>
   </div>
-  </div>
 
+  <div class="container">
+    <h2>Teams List</h2>
+    <p>Teams and its members.</p>                                                                                      
+    <div class="table-responsive">          
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="center">Team Name</th>
+          <th class="center">Team Members</th>
+          <th class="center">Delete Team</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center"> <a routerLink="/teams/{{oneTeam._id}}">{{oneTeam.teamName}}</a></td>
+          <td class="center"><p ngFor="let user of oneTeam.user"><p>{{user}}</p></td>
+          <button (click)="deleteTeam(oneTeam._id)">Delete</button>
+
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
  
