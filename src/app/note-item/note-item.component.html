@@ -1,33 +1,33 @@
+<div class="flex-container">
 
-<label>Title</label>
-<div *ngIf="this.user && theNote.user">
-  <div *ngIf="theNote.user.includes(this.user.userInfo.username)">
-    <input type="text" value="{{theNote.title}}" [(ngModel)]="theUpdate.title">
-  </div>
-  <div *ngIf="!theNote.user.includes(this.user.userInfo.username)">
-      <input type="text" value="{{theNote.title}}" readonly>
-  </div>
-</div>
-
-<p>Users:</p>
-<p *ngFor="let user of theNote.user">{{user}}</p>
-
-<div *ngIf="this.user">
-
-  <div *ngFor="let favorite of this.user.userInfo.favorites">
-    <div *ngIf="favorite === theNote._id">
+  <div *ngIf="theNote.user">
+    <div *ngIf="this.user">
       
-      <div *ngIf="!wasClicked">
-        <button (click)="removeMyNotes(this.user.userInfo._id, favorite)">Remove from favorites</button> 
-      </div>
-      <div *ngIf="wasClicked">
-        <button (click)="favoriteNote(this.user.userInfo._id, favorite)">Add to favorites</button>
+      <h2>{{theNote.title}}</h2>
+      <h3>Contributors:</h3>
+      <div class="cont-container">
+        <p class="contributors" *ngFor="let user of theNote.user"><u>{{user}}</u> &nbsp;</p>
       </div>
       
     </div>
   </div>
-
+  
+  <div *ngIf="this.user">
+    
+    <div *ngFor="let favorite of this.user.userInfo.favorites">
+      <div *ngIf="favorite === theNote._id">
+        
+        <div *ngIf="!wasClicked">
+          <button class="btn btn-primary remove-btn" (click)="removeMyNotes(this.user.userInfo._id, favorite)">Remove from favorites</button> 
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
 </div>
+
+<hr>
 
 <editor 
   apiKey="5h8cno0g0qjmtfev3xb5rwrs2eqke2ev09zpqy58stm3c5vw" 
@@ -35,22 +35,106 @@
   [(ngModel)]="theUpdate.text" 
   name="text" 
   initialValue="{{theNote.text}}"
-  menubar="false"
   toolbar="undo redo | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist | table | link image | fullscreen"
   class="text-editor"
   >
-  <!-- [inline]="true" -->
 </editor>
 
 <div *ngIf="theNote.user">
   <div *ngIf="this.user">
 
-    <div *ngIf="theNote.user.includes(this.user.userInfo.username)">
-      <input type="text" [(ngModel)]="body.username" name="username">
-      <button (click)="addUser(theNote._id, body)">Invite a user to edit</button>
-      <button (click)="updateNote(theNote._id)">Submit Changes</button>
-      <button (click)="deleteNote(theNote._id)">Delete</button>
+  <div *ngIf="theNote.user.includes(this.user.userInfo.username)" class="config-buttons">
+    <button class="btn btn-primary save-btn" (click)="updateNote(theNote._id)">Save</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-invite">Invite a user to edit</button>
+    <div class="modal fade bd-example-modal-sm" id="modal-invite" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-title">
+            <h4 class="center">Invite a user to edit this note</h4><hr>
+          </div>
+          <div class="modal-body">
+            <label><h4 class="center">Username: </h4> 
+              <input type="text" [(ngModel)]="body.username" name="username" class="title-input">
+            </label>
+          </div>
+          <div class="modal-footer">
+            <button data-dismiss="modal" (click)="addUser(theNote._id, body)" class="btn btn-primary">Confirm</button>
+            <button data-dismiss="modal" class="btn btn-primary">Cancel</button>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-edit">Edit note</button>
+    <div class="modal fade bd-example-modal-sm" id="modal-edit" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-title">
+            <h4 class="center">Edit Note</h4> <hr>
+          </div>
+          <div class="modal-body">
+            <label><h4 class="center">Title</h4>
+              <input type="text" [(ngModel)]="theNote.title" name="title" class="title-input" required>
+            </label>
+            <label><h4 class="center">Status</h4>
+              <label for="statusChoice1" class="container">Unfinished
+                <input type="radio" value="Unfinished" [(ngModel)]="theUpdate.status" id="statusChoice1" name="status" checked>
+                <span class="checkmark"></span>
+              </label>
+              <label for="statusChoice2" class="container">In Progress
+                <input type="radio" value="In Progress" [(ngModel)]="theUpdate.status" id="statusChoice2" name="status"/>
+                <span class="checkmark"></span>
+              </label>
+              <label for="statusChoice3" class="container">Complete
+                <input type="radio" value="Complete" [(ngModel)]="theUpdate.status" id="statusChoice3" name="status"/>
+                <span class="checkmark"></span>
+              </label>
+            </label> 
+            <label><h4 class="center">Urgency</h4>
+              <label for="urgencyChoice1" class="container">Urgent
+                  <input type="radio" [(ngModel)]="theUpdate.urgency" name="urgency" id="urgencyChoice1" value="Urgent" checked>
+                  <span class="checkmark"></span>
+                </label>
+                <label for="urgencyChoice2" class="container">Important
+                  <input type="radio" [(ngModel)]="theUpdate.urgency" name="urgency" id="urgencyChoice2" value="Important">
+                  <span class="checkmark"></span>
+                </label>
+                <label for="urgencyChoice3" class="container">Not Important
+                  <input type="radio" [(ngModel)]="theUpdate.urgency" name="urgency" id="urgencyChoice3" value="Not Important">
+                  <span class="checkmark"></span>
+                </label>
+            </label>
+          </div>
+          <div class="modal-footer">
+            <div class="btn-group">
+              <button class="btn btn-default" data-dismiss="modal" (click)="updateNote(theNote._id)">Submit Changes</button>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>      
+    
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-delete">Delete</button>
+      <div class="modal fade bd-example-modal-sm" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-title" style="margin: 10px">
+              <h4>Are you sure you want to delete this note?</h4>
+            </div>
+            <hr>
+            <div class="modal-body">
+              <p>This action is irreversible and all contents of this note will be lost forever</p>
+            </div>
+            <div class="modal-footer">
+              <button data-dismiss="modal" class="btn btn-primary" (click)="deleteNote(theNote._id)">Yes</button>
+              <button data-dismiss="modal" class="btn btn-primary" >No</button>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
-</div>
+
+  </div>

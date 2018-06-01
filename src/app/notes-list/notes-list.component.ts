@@ -35,7 +35,6 @@ export class NotesListComponent implements OnInit {
 
   user: any = this.authService.currentUser;
   allTheNotes: Array<any> = [];
-  isShowing: Boolean = false;
   noteResults: Array<any> = this.allTheNotes;
   sortedNotes: any = this.allTheNotes;
   favoriteNotes: any = [];
@@ -45,7 +44,7 @@ export class NotesListComponent implements OnInit {
     user: '',
     title: '',
     text: '',
-    status: '',
+    status: 'Unfinished',
     urgency: '',
     category: '',
     date: Date.now(),
@@ -85,10 +84,6 @@ export class NotesListComponent implements OnInit {
       this.getAllTheNotes();
     }
 
-  toggleForm() {
-    this.isShowing = !this.isShowing;
-  }
-
   logout() {
     this.authService.logout();
   }
@@ -99,7 +94,6 @@ export class NotesListComponent implements OnInit {
         this.singleNote = theNote;
       });
   }
-
 
   search(searchText) {
     this.noteResults = this.allTheNotes.filter(notes => {
@@ -115,13 +109,6 @@ export class NotesListComponent implements OnInit {
       });
       this.refresh();
   }
-
-  // removeMyNotes(theId, noteId): void {
-  //   this.noteService.removeFavorite(theId, noteId)
-  //   .subscribe(() => {
-  //     this.getAllTheNotes();
-  //   });
-  // }
 
   getAllTheNotes(): void {
     this.noteService.getAllNotes()
@@ -143,6 +130,7 @@ export class NotesListComponent implements OnInit {
       .subscribe(() => {
         this.getAllTheNotes();
       });
+      this.router.navigate(['/user']);
   }
 
   sort(notes): void {
