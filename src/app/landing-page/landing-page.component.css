@@ -143,3 +143,9 @@ body {
   h1 {
     font-family: "Lucida Console", "Lucida Sans Typewriter", monaco, "Bitstream Vera Sans Mono", monospace;
   }
+
+  .username-signup {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 5px;
+  }

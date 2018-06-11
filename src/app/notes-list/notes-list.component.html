@@ -84,6 +84,8 @@
 
 <h3 class="center" style="margin: 10px;">Or search for them by title</h3>
 <input placeholder="Search" class="search-bar" [(ngModel)]='searchText' (keyup)="search(searchText)">
-<div *ngFor="let oneNote of noteResults"  class="search-container">
-  <a routerLink="/notes/{{oneNote._id}}" class="search-links">{{oneNote.title}} <i>by: {{oneNote.user}}</i></a>
+<div class="search-box">
+  <div *ngFor="let oneNote of noteResults"  class="search-container">
+    <a routerLink="/notes/{{oneNote._id}}" class="search-links">{{oneNote.title}} <i>by: {{oneNote.user}}</i></a>
+  </div>
 </div>

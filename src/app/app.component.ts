@@ -32,7 +32,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.authService.currentUser);
     this.authService.isLoggedIn()
       .toPromise()
       .then(() => {
@@ -60,7 +59,6 @@ export class AppComponent implements OnInit {
       .subscribe(
         (user) => {
           this.user = user;
-          console.log('user:', this.user);
         },
         (err) => this.error = err
       );

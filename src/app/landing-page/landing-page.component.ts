@@ -46,7 +46,6 @@ export class LandingPageComponent {
       .subscribe(
         (user) => {
           this.user = user;
-          console.log('user:', this.user);
           this.formInfo = {};
           this.router.navigate(['/user']);
         },
@@ -73,7 +72,6 @@ export class LandingPageComponent {
       .toPromise()
       .then(() => {
         this.user = this.myService.currentUser;
-        console.log('this.user: ', this.user.userInfo);
         if (this.user.userInfo === null) {
           this.router.navigate(['/welcome']);
         }
@@ -82,7 +80,6 @@ export class LandingPageComponent {
         console.log('err in notes: ', err);
         this.router.navigate(['/welcome']);
       });
-
   }
 
 }

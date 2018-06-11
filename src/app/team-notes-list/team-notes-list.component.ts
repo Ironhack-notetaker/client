@@ -101,7 +101,6 @@ export class TeamNotesListComponent implements OnInit {
     this.myService.getOneTeam(theId)
       .subscribe((response) => {
         this.theTeam.note = response;
-        console.log(this.theTeam);
       });
   }
 
@@ -110,10 +109,6 @@ export class TeamNotesListComponent implements OnInit {
       .subscribe(() => {
       });
       this.myService.updateTeamNotes(this.theTeam._id, this.newNote)
-        .subscribe((thisUpdatedTeam) => {
-          // this.updateTeamsNotes(thisUpdatedTeam._id);
-          console.log(thisUpdatedTeam);
-        });
       window.location.reload();
   }
 

@@ -40,7 +40,6 @@ export class UserProfileComponent implements OnInit {
     this.authService.getUserInfo()
       .subscribe((user) => {
         this.user = user;
-        console.log('user from user profile page', this.user);
       });
 
     this.noteService.getFavorites()

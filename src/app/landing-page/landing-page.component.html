@@ -1,29 +1,3 @@
-<!-- <form>
-  <h2> Login or Signup </h2>
-  <label> Username </label>
-  <input type="text" [(ngModel)]="formInfo.username" name="username"/>
-  <br>
-  <label> Password </label>
-  <input type="password" [(ngModel)]="formInfo.password" name="password"/>
-
-  <button (click)="login()"> login </button>
-  <button (click)="signup()"> signup </button>
-</form>
-
-<p class="error"> {{ error }} </p>
-
-<div *ngIf="user">
-  <div *ngIf="user.isLoggedIn">
-
-    <h2> You are now logged in as {{ this.user.userInfo.username }}!! </h2>
-    <p> Here's the user object </p>
-    <pre> {{ user | json }} </pre>
-    
-    <button (click)="logout()"> logout </button>
-    
-  </div>
-</div> -->
-
 <div class="background">
   <div class="landingPageContentContainer">
     <div class="landingPageWelcomePhrase">
@@ -58,7 +32,6 @@
         
         
         <div>
-          <!-- <h3>Log In Demo</h3> -->
           <button type='button' class="btn btn1 btn-success btn-primary btn-lg" data-toggle="modal" data-target="#popUpWindow">Sign Up</button>
           <div class="modal fade" id="popUpWindow">
             <div class="modal-dialog">
@@ -72,8 +45,8 @@
                 <div class="modal-header">
                   <form role="form">
                     <div class="form-group">
-                      <input type="text" name="user" [(ngModel)]="formInfo.username" placeholder="Username">
-                      <input type="password" name="pass" [(ngModel)]="formInfo.password" placeholder="Password">
+                      <input type="text" name="username" [(ngModel)]="formInfo.username" placeholder="Username" class="username-signup">
+                      <input type="password" name="password" [(ngModel)]="formInfo.password" placeholder="Password">
                     </div>
                   </form>
                 </div>
@@ -85,9 +58,9 @@
               </div>
             </div>
           </div>
-          
         </div>
       </div>
   </div>
+
   <router-outlet></router-outlet>
 </div>
