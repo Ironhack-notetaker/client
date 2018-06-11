@@ -233,3 +233,6 @@ tr:nth-child(odd) td:hover {
   border: 1px solid lightgray;
 }
 
+.filler-div {
+  padding: 150px;
+}

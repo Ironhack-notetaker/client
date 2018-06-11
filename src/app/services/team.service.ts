@@ -13,23 +13,23 @@ export class TeamService {
   constructor (private http: Http) { }
 
   getOneTeam(theId) {
-    return this.http.get(environment.base_URL + `/team/${theId}`, {withCredentials: true})
+    return this.http.get(environment.base_URL + `/t/team/${theId}`, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
   getAllTeams() {
-    return this.http.get(environment.base_URL + '/team', {withCredentials: true})
+    return this.http.get(environment.base_URL + '/t/team', {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
   deleteTeam(theId) {
     const body = {};
-    return this.http.post(environment.base_URL + `/team/delete/${theId}`, body, {withCredentials: true})
+    return this.http.post(environment.base_URL + `/t/team/delete/${theId}`, body, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
   updateTeam(theId, theUpdates) {
-    return this.http.post(environment.base_URL + `/team/update/${theId}`, theUpdates, {withCredentials: true})
+    return this.http.post(environment.base_URL + `/t/team/update/${theId}`, theUpdates, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
@@ -39,7 +39,7 @@ export class TeamService {
   }
 
   updateTeamNotes(theTeamId, theNewNote) {
-    return this.http.post(environment.base_URL + `/team/notes/${theTeamId}`, theNewNote, {withCredentials: true})
+    return this.http.post(environment.base_URL + `/t/team/notes/${theTeamId}`, theNewNote, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
@@ -49,12 +49,12 @@ export class TeamService {
   }
 
   getTeamNotes(teamId) {
-    return this.http.get(environment.base_URL + `/getteamnotes/${teamId}`, {withCredentials: true})
+    return this.http.get(environment.base_URL + `/t/getteamnotes/${teamId}`, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
   addUserToTeam(teamId, body) {
-    return this.http.post(environment.base_URL + `/team/adduser/${teamId}`, body, {withCredentials: true})
+    return this.http.post(environment.base_URL + `/t/team/adduser/${teamId}`, body, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 

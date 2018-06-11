@@ -13,28 +13,28 @@ export class NoteService {
   constructor (private http: Http) { }
 
   getOneNote(theId) {
-    return this.http.get(environment.base_URL + `/notes/${theId}`, {withCredentials: true})
+    return this.http.get(environment.base_URL + `/n/notes/${theId}`, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
   deleteNote(theId) {
     const body = {};
-    return this.http.post(environment.base_URL + `/note/delete/${theId}`, body, {withCredentials: true})
+    return this.http.post(environment.base_URL + `/n/note/delete/${theId}`, body, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
   updateNote(theId, theUpdates) {
-    return this.http.post(environment.base_URL + `/note/update/${theId}`, theUpdates, {withCredentials: true})
+    return this.http.post(environment.base_URL + `/n/note/update/${theId}`, theUpdates, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
   createNote(theWholeNote) {
-    return this.http.post(environment.base_URL + `/notes/create`, theWholeNote, {withCredentials: true})
+    return this.http.post(environment.base_URL + `/n/notes/create`, theWholeNote, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
   getAllNotes() {
-    return this.http.get(environment.base_URL + '/notes', {withCredentials: true})
+    return this.http.get(environment.base_URL + `/n/notes`, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 
@@ -54,7 +54,7 @@ export class NoteService {
   }
 
   addUserToNote(noteId, body) {
-    return this.http.post(environment.base_URL + `/note/adduser/${noteId}`, body, {withCredentials: true})
+    return this.http.post(environment.base_URL + `/n/note/adduser/${noteId}`, body, {withCredentials: true})
     .map((responseFromApi) => responseFromApi.json());
   }
 

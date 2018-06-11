@@ -21,6 +21,7 @@ import {
   Router
 } from '@angular/router';
 import {
+
   PaginationInstance
 } from 'ngx-pagination';
 
@@ -35,7 +36,6 @@ export class NotesListComponent implements OnInit {
   user: any = this.authService.currentUser;
   allTheNotes: Array<any> = [];
   noteResults: Array<any> = this.allTheNotes;
-  sortedNotes: any = this.allTheNotes;
   favoriteNotes: any = [];
   singleNote: any;
   searchText: any;
@@ -94,13 +94,6 @@ export class NotesListComponent implements OnInit {
       });
   }
 
-  search(searchText) {
-    this.noteResults = this.allTheNotes.filter(notes => {
-      return notes.title.toLowerCase().includes(searchText.toLowerCase());
-    });
-    this.getAllTheNotes();
-  }
-
   myNotes(theId, noteId): void {
     this.noteService.favoriteNote(theId, noteId)
       .subscribe((favorite) => {
@@ -117,6 +110,14 @@ export class NotesListComponent implements OnInit {
     this.noteService.getFavorites();
   }
 
+  search(searchText) {
+    this.noteResults = this.allTheNotes.filter(notes => {
+      console.log('===============================', notes.title);
+      return notes.title.toLowerCase().includes(searchText.toLowerCase());
+    });
+    this.getAllTheNotes();
+  }
+
   deleteNote(theId): void {
     this.noteService.deleteNote(theId)
       .subscribe(() => {
@@ -130,10 +131,6 @@ export class NotesListComponent implements OnInit {
         this.getAllTheNotes();
       });
       this.router.navigate(['/user']);
-  }
-
-  sort(notes): void {
-    notes.sort();
   }
 
   refresh(): void {

@@ -44,7 +44,7 @@
         <li><a [routerLink] = "['/notes']">Notes</a></li>
         <li><a [routerLink] = "['/about']">About</a></li>
         
-        <li *ngIf="this.user !== undefined"><a (click)="logout()" [routerLink] = "['/welcome']">Logout</a></li>
+        <li *ngIf="authService.currentUser"><a (click)="logout()" [routerLink] = "['/welcome']" *ngIf="authService.currentUser.userInfo !== null">Logout</a></li>
         
       </ul>
       

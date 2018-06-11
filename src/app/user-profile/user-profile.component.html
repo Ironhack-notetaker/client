@@ -25,7 +25,7 @@
 </form> -->
 
 
-<div class="container">
+<div class="container" *ngIf="this.user">
   <!-- <h3 [(ngModel)]="formInfo.username">Username: {{this.user.username}}</h3>
   <h3  [(ngModel)]="formInfo.email">Email: {{this.user.email}}</h3>
   <h3>Bio:</h3>
@@ -39,7 +39,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-      <h3 class="modal-title" id="lineModalLabel">My Modal</h3>
+      <h3 class="modal-title" id="lineModalLabel">Update personal information</h3>
     </div>
     <div class="modal-body">
 
@@ -133,18 +133,18 @@
 
 
 <div class="row">
-  <div class="content">
-    <h3>My Favorites</h3>
+  <div class="content favorites-block">
+    <h3 class="center">My Favorites</h3>
     <div *ngFor="let favorite of userFavorites">
       <ul>
-        <p><a routerLink="/notes/{{favorite._id}}">{{favorite.title}}</a></p>
+        <p><a routerLink="/notes/{{favorite._id}}">{{favorite.title}} <i>by: {{favorite.user}}</i></a></p>
 
       </ul>
     </div>
   </div>
   
   <div class="content">
-    <h3>My Notes</h3>
+    <h3 class="center">My Notes</h3>
     <div *ngFor="let note of userNotes">
       <ul>
         <p *ngIf="note.user.includes(user.username)"><a routerLink="/notes/{{note._id}}">{{note.title}}</a></p>
@@ -153,9 +153,11 @@
   </div>
   
   <div class="content">
-    <h3>My Teams</h3>
+    <h3 class="center">My Teams</h3>
     <div *ngFor="let team of userTeams">
         <p *ngIf="team.user.includes(user.username)"><a routerLink="/teams/{{team._id}}">{{team.teamName}}</a></p>
     </div>
   </div>
 </div> 
+
+<div class="temp-space"></div>

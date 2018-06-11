@@ -12,3 +12,11 @@
     padding: 15px;
     margin: 0 auto;
 }
+
+.center {
+    text-align: center;
+}
+
+.temp-space {
+    padding: 110px;
+}

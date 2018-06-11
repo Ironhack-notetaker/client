@@ -88,3 +88,7 @@ tr:nth-child(odd) td:hover {
 .center {
   text-align: center;
 }
+
+.filler-div {
+  padding: 150px;
+}

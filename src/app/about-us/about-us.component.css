@@ -1,0 +1,20 @@
+.img {
+  width: 300px;
+  height: 300px;
+}
+
+.container-fluid {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-share {
+  flex-direction: column;
+  height: 300px;
+}
+
+.center {
+  text-align: center;
+}

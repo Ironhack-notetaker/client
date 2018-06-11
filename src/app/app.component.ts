@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   error: any;
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router
   ) {}
 
@@ -76,7 +76,6 @@ export class AppComponent implements OnInit {
         },
         (err) => this.error = err
       );
-      window.location.reload();
   }
 
 

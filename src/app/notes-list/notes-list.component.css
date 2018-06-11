@@ -203,10 +203,10 @@ tr:nth-child(odd) td:hover {
 
 .search-bar {
   display: block;
-  margin: 0 auto;
+  margin: 20px auto;
   width: 300px;
   text-align: center;
-  height: 40px;
+  min-height: 40px;
   font-size: 20px;
 }
 
@@ -226,6 +226,7 @@ tr:nth-child(odd) td:hover {
 }
 
 .search-box {
+  min-height: 0px;
   display: block;
   margin: 0 auto;
   background-color: white;
