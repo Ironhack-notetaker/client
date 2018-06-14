@@ -107,9 +107,10 @@ export class TeamNotesListComponent implements OnInit {
   addNewNote() {
     this.noteService.createNote(this.newNote)
       .subscribe(() => {
+        this.getOneTeam(this.theTeam._id);
+        this.myService.updateTeamNotes(this.theTeam._id, this.newNote);
       });
-      this.myService.updateTeamNotes(this.theTeam._id, this.newNote)
-      window.location.reload();
+    window.location.reload();
   }
 
   updateThisTeam(theId) {

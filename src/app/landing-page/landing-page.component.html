@@ -1,12 +1,9 @@
 <div class="background">
-  <div class="landingPageContentContainer">
-    <div class="landingPageWelcomePhrase">
-        <h1>Welcome To NoteShare if you have an account please log in. If you are new to our site please sign up.</h1>
-      </div>
-      <div class="buttonContainer">
-
-        <div>
-          <div class="center"><a href="#" data-toggle="modal" data-target="#login-modal"><button class="btn btn1 btn-primary btn-lg">Login</button></a></div>
+    <div class="flexbox-container">
+      <div class="welcomeText">
+        <h1>Welcome To NoteShare if you have an account log in here</h1>
+        <div class="login-button">
+            <button class="btn btn1 btn-primary btn-lg" data-toggle="modal" data-target="#login-modal">Login</button>
           <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
               <div class="loginmodal-container">
@@ -21,46 +18,46 @@
             </div>
           </div>
         </div>
-        
-        
-        <div>
-          <button type="button" class="btn btn-primary btn-lg" routerLink="/quicky">
-            Quick Note
-          </button>
+        <h2>Or if you dont, sign up by clicking this button</h2>
+        <button type='button' class="btn btn1 btn-success btn-primary btn-lg signup-button" data-toggle="modal" data-target="#popUpWindow">Sign Up</button>
+        <h2 class="hurry">In a hurry?</h2>
+        <button type="button" class="btn btn-primary btn-lg quick-note" routerLink="/quicky">
+          Write a quick note
+        </button>
+      </div>
+      <div>
+        <img src="https://www.pardot.com/content/uploads/2017/04/productivity.jpg" alt="Productivity image" class="landing-image">
+      </div>
+     
+    </div>
+      <div class="buttonContainer">
           
-        </div>
-        
-        
-        <div>
-          <button type='button' class="btn btn1 btn-success btn-primary btn-lg" data-toggle="modal" data-target="#popUpWindow">Sign Up</button>
-          <div class="modal fade" id="popUpWindow">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <!-- header -->
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h3 class="modal-title">Sign Up</h3>
-                </div>
-                <!-- body -->
-                <div class="modal-header">
-                  <form role="form">
-                    <div class="form-group">
-                      <input type="text" name="username" [(ngModel)]="formInfo.username" placeholder="Username" class="username-signup">
-                      <input type="password" name="password" [(ngModel)]="formInfo.password" placeholder="Password">
-                    </div>
-                  </form>
-                </div>
-                <!-- footer -->
-                <div class="modal-footer">
-                  <button class="btn btn-primary btn-block" data-dismiss="modal"  (click)="signup()">Sign Up</button>
-                </div>
-                
+        <div class="modal fade" id="popUpWindow">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <!-- header -->
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">Sign Up</h3>
               </div>
+              <!-- body -->
+              <div class="modal-header">
+                <form role="form">
+                  <div class="form-group">
+                    <input type="text" name="username" [(ngModel)]="formInfo.username" placeholder="Username" class="username-signup">
+                    <input type="password" name="password" [(ngModel)]="formInfo.password" placeholder="Password">
+                  </div>
+                </form>
+              </div>
+              <!-- footer -->
+              <div class="modal-footer">
+                <button class="btn btn-primary btn-block" data-dismiss="modal"  (click)="signup()">Sign Up</button>
+              </div>
+              
             </div>
           </div>
         </div>
       </div>
-  </div>
 
   <router-outlet></router-outlet>
 </div>

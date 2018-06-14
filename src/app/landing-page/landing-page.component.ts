@@ -35,7 +35,7 @@ export class LandingPageComponent {
         (user) => {
           this.user = user;
           this.formInfo = {};
-          this.router.navigate(['/user']);
+          this.router.navigate(['/welcome']);
         },
         (err) => this.error = err
       );

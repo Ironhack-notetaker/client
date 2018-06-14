@@ -1,10 +1,5 @@
 
-<a [routerLink]="['/teams']">Go back</a>
-
 <h2>Team: {{theTeam.teamName}}</h2>
-<!-- <input type="text" value="{{theTeam.teamName}}" [(ngModel)]="theUpdate.teamName" name="teamName">
-Members: -->
-
 <h4>Members</h4>
 <ul *ngFor="let member of theTeam.user" class="member-list">
   <li>{{member}}</li>
@@ -115,9 +110,9 @@ Members: -->
 
 
 
-    <button type="button" class="btn btn-primary new-note-btn" data-toggle="modal" data-target=".bd-example-modal-sm">Create a new Note</button>
+    <button type="button" class="btn btn-primary new-note-btn" data-toggle="modal" data-target="#modal-create">Create a new Note</button>
 
-      <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal fade bd-example-modal-sm" id="modal-create" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <label class="title-label">Title: </label>
